@@ -1,4 +1,4 @@
-package br.com.formigasemgrafo.core;
+package br.com.formigasemgrafo.core.gerenciadores;
 
 import java.applet.Applet;
 import java.applet.AudioClip;

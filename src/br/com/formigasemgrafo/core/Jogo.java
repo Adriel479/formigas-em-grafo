@@ -10,12 +10,17 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
+import br.com.formigasemgrafo.core.gerenciadores.Audio;
+import br.com.formigasemgrafo.core.gerenciadores.Fonte;
+import br.com.formigasemgrafo.core.gerenciadores.Imagem;
+import br.com.formigasemgrafo.core.gerenciadores.Entrada;
+
 public class Jogo {
 
 	private JFrame janela;
 	private BufferStrategy estrategiaDeRenderizacao;
 	private boolean estadoDoJogo;
-	Teclado teclado;
+	Entrada teclado;
 	Imagem imagem;
 	Audio audio;
 	Fonte fonte;
@@ -32,7 +37,7 @@ public class Jogo {
 		janela.setVisible(true);
 		estrategiaDeRenderizacao = janela.getBufferStrategy();
 		estadoDoJogo = false;
-		teclado = Teclado.getInstancia();
+		teclado = Entrada.getInstancia();
 		imagem = Imagem.getInstancia();
 		audio = Audio.getInstancia();
 		fonte = Fonte.getInstancia();
@@ -54,15 +59,21 @@ public class Jogo {
 	}
 
 	private void carregaDados() {
-		cenaAtual.carregarDados();
+		cenaAtual.carregar();
 	}
 
 	public void executarJogo() {
 		carregaDados();
+		cenaAtual.criar();
 		estadoDoJogo = true;
 		while (estadoDoJogo) {
-			if (isNovaCena())
+			if (isNovaCena()) {
+				cenaAtual.descarregar();
 				setNovaCena();
+				cenaAtual.carregar();
+				cenaAtual.criar();
+			}
+			teclado.atualizaCache();
 			atualizarJogo();
 			renderizarJogo();
 		}
@@ -74,7 +85,7 @@ public class Jogo {
 	}
 
 	private void atualizarJogo() {
-		cenaAtual.atualizarJogo();
+		cenaAtual.atualizar();
 		Thread.yield();
 	}
 
@@ -82,13 +93,13 @@ public class Jogo {
 		Graphics2D g = (Graphics2D) estrategiaDeRenderizacao.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, janela.getWidth(), janela.getHeight());
-		cenaAtual.renderizarJogo(g);
+		cenaAtual.renderizar(g);
 		g.dispose();
 		estrategiaDeRenderizacao.show();
 	}
 
 	private void descarregarDados() {
-		cenaAtual.descarregarDados();
+		cenaAtual.descarregar();
 		estrategiaDeRenderizacao.dispose();
 		janela.dispose();
 	}

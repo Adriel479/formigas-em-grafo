@@ -1,4 +1,4 @@
-package br.com.formigasemgrafo.core;
+package br.com.formigasemgrafo.core.gerenciadores;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

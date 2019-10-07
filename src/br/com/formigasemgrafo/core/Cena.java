@@ -1,22 +1,40 @@
 package br.com.formigasemgrafo.core;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.formigasemgrafo.core.gerenciadores.Audio;
+import br.com.formigasemgrafo.core.gerenciadores.Fonte;
+import br.com.formigasemgrafo.core.gerenciadores.Imagem;
+import br.com.formigasemgrafo.core.gerenciadores.Entrada;
 
 public abstract class Cena {
 
-	protected Teclado teclado;
+	protected Entrada teclado;
 	protected Imagem imagem;
 	protected Audio audio;
 	protected Fonte fonte;
 	private String proximaCena = null;
+	private List<Sprite> sprites;
+
+	public Cena() {
+		sprites = new ArrayList<Sprite>();
+	}
+
+	public abstract void carregar();
+
+	public abstract void atualizar();
 	
-	public abstract void carregarDados();
+	public abstract void criar();
 
-	public abstract void atualizarJogo();
+	public void renderizar(Graphics2D g) {
+		for (Sprite sprite: sprites) {
+			sprite.renderizeme(g);
+		}
+	}
 
-	public abstract void renderizarJogo(Graphics2D g);
-
-	public abstract void descarregarDados();
+	public abstract void descarregar();
 
 	void configurarGerentes(Jogo jogo) {
 		teclado = jogo.teclado;

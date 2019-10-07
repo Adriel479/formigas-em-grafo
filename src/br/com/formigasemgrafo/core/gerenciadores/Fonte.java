@@ -1,4 +1,4 @@
-package br.com.formigasemgrafo.core;
+package br.com.formigasemgrafo.core.gerenciadores;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
