@@ -5,17 +5,22 @@ import java.awt.Graphics2D;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
-public abstract class Jogo {
+public class Jogo {
 
 	private JFrame janela;
 	private BufferStrategy estrategiaDeRenderizacao;
 	private boolean estadoDoJogo;
-	protected Teclado teclado;
-	protected Imagem imagem;
-	protected Audio audio;
+	Teclado teclado;
+	Imagem imagem;
+	Audio audio;
+	Fonte fonte;
+	private Map<String, Cena> cenas;
+	private Cena cenaAtual;
 
 	public Jogo() {
 		janela = new JFrame();
@@ -30,6 +35,7 @@ public abstract class Jogo {
 		teclado = Teclado.getInstancia();
 		imagem = Imagem.getInstancia();
 		audio = Audio.getInstancia();
+		fonte = Fonte.getInstancia();
 		janela.addKeyListener(teclado);
 		janela.addWindowListener(new WindowAdapter() {
 			@Override
@@ -37,16 +43,26 @@ public abstract class Jogo {
 				finalizarJogo();
 			}
 		});
+		cenas = new HashMap<String, Cena>();
+	}
+
+	public void adicionarCena(String nome, Cena cena) {
+		if (!cenas.containsKey(nome)) {
+			cena.configurarGerentes(this);
+			cenas.put(nome, cena);
+		}
 	}
 
 	private void carregaDados() {
-		onCarregarDados();
+		cenaAtual.carregarDados();
 	}
 
 	public void executarJogo() {
 		carregaDados();
 		estadoDoJogo = true;
 		while (estadoDoJogo) {
+			if (isNovaCena())
+				setNovaCena();
 			atualizarJogo();
 			renderizarJogo();
 		}
@@ -58,7 +74,7 @@ public abstract class Jogo {
 	}
 
 	private void atualizarJogo() {
-		onAtualizarJogo();
+		cenaAtual.atualizarJogo();
 		Thread.yield();
 	}
 
@@ -66,22 +82,34 @@ public abstract class Jogo {
 		Graphics2D g = (Graphics2D) estrategiaDeRenderizacao.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, janela.getWidth(), janela.getHeight());
-		onRenderizarJogo(g);
+		cenaAtual.renderizarJogo(g);
 		g.dispose();
 		estrategiaDeRenderizacao.show();
 	}
 
 	private void descarregarDados() {
-		onDescarregarDados();
+		cenaAtual.descarregarDados();
 		estrategiaDeRenderizacao.dispose();
 		janela.dispose();
 	}
 
-	public abstract void onCarregarDados();
+	public Cena getCenaAtual() {
+		return cenaAtual;
+	}
 
-	public abstract void onAtualizarJogo();
+	public void setCenaAtual(String nome) {
+		if (cenas.containsKey(nome)) {
+			cenaAtual = cenas.get(nome);
+		} else {
+			throw new RuntimeException(String.format("A cena \"%s\" não existe.", nome));
+		}
+	}
 
-	public abstract void onRenderizarJogo(Graphics2D g);
+	public boolean isNovaCena() {
+		return cenaAtual.getProximaCena() != null;
+	}
 
-	public abstract void onDescarregarDados();
+	public void setNovaCena() {
+		setCenaAtual(cenaAtual.getProximaCena());
+	}
 }
