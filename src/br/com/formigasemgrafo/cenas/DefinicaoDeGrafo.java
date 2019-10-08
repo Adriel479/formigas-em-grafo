@@ -26,6 +26,7 @@ public class DefinicaoDeGrafo extends Cena {
 			botaoProximo0.setVisivel(false);
 			botaoProximo1.setVisivel(true);
 			if (entrada.isClique()) {
+				executarCena("desafios");
 			}
 		} else {
 			botaoProximo0.setVisivel(true);

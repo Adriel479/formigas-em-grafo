@@ -11,9 +11,9 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 import br.com.formigasemgrafo.core.gerenciadores.Audio;
+import br.com.formigasemgrafo.core.gerenciadores.Entrada;
 import br.com.formigasemgrafo.core.gerenciadores.Fonte;
 import br.com.formigasemgrafo.core.gerenciadores.Imagem;
-import br.com.formigasemgrafo.core.gerenciadores.Entrada;
 
 public class Jogo {
 
@@ -63,7 +63,9 @@ public class Jogo {
 	}
 
 	private void carregaDados() {
-		cenaAtual.carregar();
+		for (String chaves : cenas.keySet()) {
+			cenas.get(chaves).carregar();
+		}
 	}
 
 	public void executarJogo() {
@@ -78,12 +80,13 @@ public class Jogo {
 			}
 			entrada.atualizaCache();
 			atualizarJogo();
-			renderizarJogo();
 			try {
-				Thread.sleep(25);
+				Thread.sleep(17);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			renderizarJogo();
+
 		}
 		descarregarDados();
 	}
@@ -131,5 +134,5 @@ public class Jogo {
 	public void setNovaCena(boolean novaCena) {
 		this.novaCena = novaCena;
 	}
-	
+
 }
