@@ -78,12 +78,12 @@ public class Jogo {
 			}
 			entrada.atualizaCache();
 			atualizarJogo();
+			renderizarJogo();
 			try {
-				Thread.sleep(17);
+				Thread.sleep(25);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			renderizarJogo();
 		}
 		descarregarDados();
 	}

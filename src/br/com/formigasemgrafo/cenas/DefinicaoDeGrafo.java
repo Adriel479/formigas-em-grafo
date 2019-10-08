@@ -48,8 +48,8 @@ public class DefinicaoDeGrafo extends Cena {
 	public void criar() {
 		botaoVoltar0 = new Sprite(99, 481, imagem.getImagem("botaoVoltar0"));
 		botaoVoltar1 = new Sprite(99, 481, imagem.getImagem("botaoVoltar1"));
-		botaoProximo0 = new Sprite(396, 481, imagem.getImagem("botaoProximo0"));
-		botaoProximo1 = new Sprite(396, 481, imagem.getImagem("botaoProximo1"));
+		botaoProximo0 = new Sprite(450, 481, imagem.getImagem("botaoProximo0"));
+		botaoProximo1 = new Sprite(450, 481, imagem.getImagem("botaoProximo1"));
 
 		botaoVoltar1.setVisivel(false);
 		botaoProximo1.setVisivel(false);

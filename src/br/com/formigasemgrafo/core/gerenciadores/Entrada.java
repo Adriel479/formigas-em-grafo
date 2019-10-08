@@ -17,17 +17,14 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 
 	private Map<Integer, Integer> cacheDeTeclas;
 	private List<Integer> teclasPressionadas;
-	private List<Integer> teclasLiberadas;
 
 	private int x, y;
-	private boolean clique = false;
 
 	private static final Entrada entrada = new Entrada();
 
 	private Entrada() {
 		cacheDeTeclas = new HashMap<Integer, Integer>();
 		teclasPressionadas = new ArrayList<Integer>();
-		teclasLiberadas = new ArrayList<Integer>();
 	}
 
 	public static Entrada getInstancia() {
@@ -41,7 +38,6 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 
 	@Override
 	public void keyReleased(KeyEvent evento) {
-		teclasLiberadas.add(evento.getKeyCode());
 	}
 
 	public boolean isTeclaPressionada(int codigoDaTecla) {
@@ -53,14 +49,13 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 	}
 
 	public void atualizaCache() {
-		for (int teclasPressionada : teclasLiberadas) {
-			cacheDeTeclas.put(teclasPressionada, TECLA_LIBERADA);
-		}
+		for (int chave : cacheDeTeclas.keySet()) {
+			cacheDeTeclas.put(chave, TECLA_LIBERADA);
+		}	
 		for (int teclaPressionada : teclasPressionadas) {
 			cacheDeTeclas.put(teclaPressionada, TECLA_PRESSIONADA);
 		}
 		teclasPressionadas.clear();
-		teclasLiberadas.clear();
 	}
 
 	public int getX() {
@@ -72,12 +67,11 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 	}
 
 	public boolean isClique() {
-		return clique;
+		return cacheDeTeclas.containsKey(MouseEvent.BUTTON1) && cacheDeTeclas.get(MouseEvent.BUTTON1) == TECLA_PRESSIONADA;
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		this.clique = true;
+	public void mouseClicked(MouseEvent evento) {
 	}
 
 	@Override
@@ -96,8 +90,7 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		
+	public void mouseReleased(MouseEvent evento) {
 	}
 
 	@Override
