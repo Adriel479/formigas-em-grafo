@@ -20,28 +20,26 @@ public class Jogo {
 	private JFrame janela;
 	private BufferStrategy estrategiaDeRenderizacao;
 	private boolean estadoDoJogo;
-	Entrada teclado;
+	Entrada entrada;
 	Imagem imagem;
 	Audio audio;
 	Fonte fonte;
 	private Map<String, Cena> cenas;
 	private Cena cenaAtual;
+	private boolean novaCena;
 
 	public Jogo() {
 		janela = new JFrame();
 		janela.setSize(800, 600);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setIgnoreRepaint(true);
-		janela.createBufferStrategy(2);
-		janela.setLocationRelativeTo(null);
-		janela.setVisible(true);
-		estrategiaDeRenderizacao = janela.getBufferStrategy();
 		estadoDoJogo = false;
-		teclado = Entrada.getInstancia();
+		entrada = Entrada.getInstancia();
 		imagem = Imagem.getInstancia();
 		audio = Audio.getInstancia();
 		fonte = Fonte.getInstancia();
-		janela.addKeyListener(teclado);
+		janela.addKeyListener(entrada);
+		janela.addMouseListener(entrada);
+		janela.addMouseMotionListener(entrada);
 		janela.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -49,6 +47,12 @@ public class Jogo {
 			}
 		});
 		cenas = new HashMap<String, Cena>();
+		janela.setLocationRelativeTo(null);
+		janela.setIgnoreRepaint(true);
+		janela.setUndecorated(true);
+		janela.setVisible(true);
+		janela.createBufferStrategy(2);
+		estrategiaDeRenderizacao = janela.getBufferStrategy();
 	}
 
 	public void adicionarCena(String nome, Cena cena) {
@@ -69,12 +73,16 @@ public class Jogo {
 		while (estadoDoJogo) {
 			if (isNovaCena()) {
 				cenaAtual.descarregar();
-				setNovaCena();
 				cenaAtual.carregar();
 				cenaAtual.criar();
 			}
-			teclado.atualizaCache();
+			entrada.atualizaCache();
 			atualizarJogo();
+			try {
+				Thread.sleep(17);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			renderizarJogo();
 		}
 		descarregarDados();
@@ -117,10 +125,11 @@ public class Jogo {
 	}
 
 	public boolean isNovaCena() {
-		return cenaAtual.getProximaCena() != null;
+		return novaCena;
 	}
 
-	public void setNovaCena() {
-		setCenaAtual(cenaAtual.getProximaCena());
+	public void setNovaCena(boolean novaCena) {
+		this.novaCena = novaCena;
 	}
+	
 }

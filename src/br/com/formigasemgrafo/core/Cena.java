@@ -11,12 +11,13 @@ import br.com.formigasemgrafo.core.gerenciadores.Entrada;
 
 public abstract class Cena {
 
-	protected Entrada teclado;
+	protected Entrada entrada;
 	protected Imagem imagem;
 	protected Audio audio;
 	protected Fonte fonte;
 	private String proximaCena = null;
 	private List<Sprite> sprites;
+	private Jogo jogo;
 
 	public Cena() {
 		sprites = new ArrayList<Sprite>();
@@ -30,25 +31,32 @@ public abstract class Cena {
 
 	public void renderizar(Graphics2D g) {
 		for (Sprite sprite: sprites) {
-			sprite.renderizeme(g);
+			if (sprite.isVisivel())
+				sprite.renderizeme(g);
 		}
 	}
 
 	public abstract void descarregar();
 
 	void configurarGerentes(Jogo jogo) {
-		teclado = jogo.teclado;
+		entrada = jogo.entrada;
 		imagem = jogo.imagem;
 		audio = jogo.audio;
 		fonte = jogo.fonte;
+		this.jogo = jogo;
 	}
 
 	public String getProximaCena() {
 		return proximaCena;
 	}
 
-	public void executarProximaCena(String proximaCena) {
-		this.proximaCena = proximaCena;
+	public void executarCena(String proximaCena) {
+		jogo.setNovaCena(true);
+		jogo.setCenaAtual(proximaCena);
+	}
+	
+	public void adicionarSprite(Sprite sprite) {
+		sprites.add(sprite);
 	}
 
 }

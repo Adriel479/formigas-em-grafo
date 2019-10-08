@@ -8,11 +8,13 @@ public class Sprite {
 	private int x;
 	private int y;
 	private BufferedImage imagem;
+	private boolean visivel;
 
 	public Sprite(int x, int y, BufferedImage imagem) {
 		this.x = x;
 		this.y = y;
 		this.setImagem(imagem);
+		this.visivel = true;
 	}
 
 	public int getX() {
@@ -30,13 +32,29 @@ public class Sprite {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+
 	public void renderizeme(Graphics2D g) {
 		g.drawImage(imagem, x, y, null);
 	}
 
 	public void setImagem(BufferedImage imagem) {
 		this.imagem = imagem;
+	}
+
+	public boolean isVisivel() {
+		return visivel;
+	}
+
+	public void setVisivel(boolean visivel) {
+		this.visivel = visivel;
+	}
+
+	public int getComprimento() {
+		return this.imagem.getWidth();
+	}
+
+	public int getLargura() {
+		return this.imagem.getHeight();
 	}
 
 }
