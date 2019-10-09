@@ -31,16 +31,18 @@ public class Desafios extends Cena {
 			botaoAlimentacao0.setVisivel(false);
 			botaoAlimentacao1.setVisivel(true);
 			if (entrada.isClique()) {
+				executarCena("mapaAlimentacao");
 			}
 		} else {
 			botaoAlimentacao0.setVisivel(true);
 			botaoAlimentacao1.setVisivel(false);
 		}
-		
+
 		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoProtecao0)) {
 			botaoProtecao0.setVisivel(false);
 			botaoProtecao1.setVisivel(true);
 			if (entrada.isClique()) {
+				executarCena("mapaProtecao");
 			}
 		} else {
 			botaoProtecao0.setVisivel(true);
@@ -56,7 +58,7 @@ public class Desafios extends Cena {
 		} else {
 			botaoVoltar0.setVisivel(true);
 			botaoVoltar1.setVisivel(false);
-		}	
+		}
 	}
 
 	@Override
