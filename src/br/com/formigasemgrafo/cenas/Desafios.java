@@ -75,13 +75,13 @@ public class Desafios extends Cena {
 		botaoProtecao1.setVisivel(false);
 		botaoVoltar1.setVisivel(false);
 
-		adicionarSprite(fundoDesafios);
-		adicionarSprite(botaoAlimentacao0);
-		adicionarSprite(botaoAlimentacao1);
-		adicionarSprite(botaoProtecao0);
-		adicionarSprite(botaoProtecao1);
-		adicionarSprite(botaoVoltar0);
-		adicionarSprite(botaoVoltar1);
+		adicionarObjetoRenderizavel(fundoDesafios);
+		adicionarObjetoRenderizavel(botaoAlimentacao0);
+		adicionarObjetoRenderizavel(botaoAlimentacao1);
+		adicionarObjetoRenderizavel(botaoProtecao0);
+		adicionarObjetoRenderizavel(botaoProtecao1);
+		adicionarObjetoRenderizavel(botaoVoltar0);
+		adicionarObjetoRenderizavel(botaoVoltar1);
 	}
 
 	@Override

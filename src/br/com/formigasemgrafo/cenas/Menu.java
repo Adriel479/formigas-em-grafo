@@ -54,11 +54,11 @@ public class Menu extends Cena {
 		botaoIniciar1.setVisivel(false);
 		botaoCredito1.setVisivel(false);
 
-		adicionarSprite(fundoMenu);
-		adicionarSprite(botaoIniciar0);
-		adicionarSprite(botaoIniciar1);
-		adicionarSprite(botaoCredito0);
-		adicionarSprite(botaoCredito1);
+		adicionarObjetoRenderizavel(fundoMenu);
+		adicionarObjetoRenderizavel(botaoIniciar0);
+		adicionarObjetoRenderizavel(botaoIniciar1);
+		adicionarObjetoRenderizavel(botaoCredito0);
+		adicionarObjetoRenderizavel(botaoCredito1);
 	}
 
 	@Override

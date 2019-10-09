@@ -64,7 +64,7 @@ public class MapaAlimentacao extends Cena {
 				g.setComposite(cacheComposite);
 			}
 		};
-		adicionarSprite(fundoMapaAlimentacao);
+		adicionarObjetoRenderizavel(fundoMapaAlimentacao);
 		fases = new Ellipse2D.Float[5];
 		estadoDasFasesDoDesafioDeAlimentacao = new boolean[5];
 
@@ -80,8 +80,8 @@ public class MapaAlimentacao extends Cena {
 
 		botaoVoltar1.setVisivel(false);
 
-		adicionarSprite(botaoVoltar0);
-		adicionarSprite(botaoVoltar1);
+		adicionarObjetoRenderizavel(botaoVoltar0);
+		adicionarObjetoRenderizavel(botaoVoltar1);
 
 	}
 

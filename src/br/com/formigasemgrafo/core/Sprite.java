@@ -3,7 +3,7 @@ package br.com.formigasemgrafo.core;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class Sprite {
+public class Sprite implements Renderizavel{
 
 	private int x;
 	private int y;
@@ -34,7 +34,8 @@ public class Sprite {
 	}
 
 	public void renderizeme(Graphics2D g) {
-		g.drawImage(imagem, x, y, null);
+		if (isVisivel())
+			g.drawImage(imagem, x, y, null);
 	}
 
 	public void setImagem(BufferedImage imagem) {

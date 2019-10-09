@@ -55,11 +55,11 @@ public class DefinicaoDeGrafo extends Cena {
 		botaoVoltar1.setVisivel(false);
 		botaoProximo1.setVisivel(false);
 
-		adicionarSprite(new Sprite(0, 0, imagem.getImagem("grafo")));
-		adicionarSprite(botaoVoltar0);
-		adicionarSprite(botaoVoltar1);
-		adicionarSprite(botaoProximo0);
-		adicionarSprite(botaoProximo1);
+		adicionarObjetoRenderizavel(new Sprite(0, 0, imagem.getImagem("grafo")));
+		adicionarObjetoRenderizavel(botaoVoltar0);
+		adicionarObjetoRenderizavel(botaoVoltar1);
+		adicionarObjetoRenderizavel(botaoProximo0);
+		adicionarObjetoRenderizavel(botaoProximo1);
 	}
 
 	@Override

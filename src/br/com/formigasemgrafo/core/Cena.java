@@ -18,12 +18,12 @@ public abstract class Cena {
 	protected Audio audio;
 	protected Fonte fonte;
 	private String proximaCena = null;
-	private List<Sprite> sprites;
+	private List<Renderizavel> objetosRenderizaveis;
 	private Jogo jogo;
 	private Map<String, Object> atributosCompatilhados;
 
 	public Cena() {
-		sprites = new ArrayList<Sprite>();
+		objetosRenderizaveis = new ArrayList<Renderizavel>();
 		atributosCompatilhados = new HashMap<String, Object>();
 	}
 
@@ -34,9 +34,8 @@ public abstract class Cena {
 	public abstract void criar();
 
 	public void renderizar(Graphics2D g) {
-		for (Sprite sprite : sprites) {
-			if (sprite.isVisivel())
-				sprite.renderizeme(g);
+		for (Renderizavel objetoRenderizavel : objetosRenderizaveis) {
+			objetoRenderizavel.renderizeme(g);
 		}
 	}
 
@@ -59,8 +58,8 @@ public abstract class Cena {
 		jogo.setCenaAtual(proximaCena);
 	}
 
-	public void adicionarSprite(Sprite sprite) {
-		sprites.add(sprite);
+	public void adicionarObjetoRenderizavel(Renderizavel objetoRenderizavel) {
+		objetosRenderizaveis.add(objetoRenderizavel);
 	}
 
 	public void adicionarAtributoCompartilhavel(String nomeDoAtributo, Object atributo) {

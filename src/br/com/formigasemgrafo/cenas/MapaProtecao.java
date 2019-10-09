@@ -64,7 +64,7 @@ public class MapaProtecao extends Cena {
 				g.setComposite(cacheComposite);
 			}
 		};
-		adicionarSprite(fundoMapaProtecao);
+		adicionarObjetoRenderizavel(fundoMapaProtecao);
 		fases = new Ellipse2D.Float[5];
 		estadoDasFasesDoDesafioDeProtecao = new boolean[5];
 
@@ -80,8 +80,8 @@ public class MapaProtecao extends Cena {
 
 		botaoVoltar1.setVisivel(false);
 
-		adicionarSprite(botaoVoltar0);
-		adicionarSprite(botaoVoltar1);
+		adicionarObjetoRenderizavel(botaoVoltar0);
+		adicionarObjetoRenderizavel(botaoVoltar1);
 	}
 
 	@Override
