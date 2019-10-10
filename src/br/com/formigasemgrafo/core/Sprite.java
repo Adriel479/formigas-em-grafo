@@ -5,10 +5,10 @@ import java.awt.image.BufferedImage;
 
 public class Sprite implements Renderizavel{
 
-	private int x;
-	private int y;
-	private BufferedImage imagem;
-	private boolean visivel;
+	protected int x;
+	protected int y;
+	protected BufferedImage imagem;
+	protected boolean visivel;
 
 	public Sprite(int x, int y, BufferedImage imagem) {
 		this.x = x;

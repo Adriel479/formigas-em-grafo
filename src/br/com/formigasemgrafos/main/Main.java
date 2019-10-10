@@ -2,6 +2,7 @@ package br.com.formigasemgrafos.main;
 
 import java.io.FileNotFoundException;
 
+import br.com.formigasemgrafo.cenas.BuscaEmProfundidadeFase1;
 import br.com.formigasemgrafo.cenas.DefinicaoDeGrafo;
 import br.com.formigasemgrafo.cenas.Desafios;
 import br.com.formigasemgrafo.cenas.MapaAlimentacao;
@@ -18,7 +19,8 @@ public class Main {
 		formigasEmGrafo.adicionarCena("desafios", new Desafios());
 		formigasEmGrafo.adicionarCena("mapaAlimentacao", new MapaAlimentacao());
 		formigasEmGrafo.adicionarCena("mapaProtecao", new MapaProtecao());
-		formigasEmGrafo.setCenaAtual("menuPrincipal");
+		formigasEmGrafo.adicionarCena("fase1BuscaEmProfundidade", new BuscaEmProfundidadeFase1());
+		formigasEmGrafo.setCenaAtual("fase1BuscaEmProfundidade");
 		formigasEmGrafo.executarJogo();
 	}
 

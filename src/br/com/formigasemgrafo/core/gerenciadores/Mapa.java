@@ -101,7 +101,4 @@ public class Mapa {
 		}
 	}
 
-	public MapaSprite getAgrupamentoDeSprite(String nome) {
-		return mapas.get(nome);
-	}
 }

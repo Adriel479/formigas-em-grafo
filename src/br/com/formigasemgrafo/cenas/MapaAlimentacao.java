@@ -37,6 +37,7 @@ public class MapaAlimentacao extends Cena {
 			botaoVoltar0.setVisivel(true);
 			botaoVoltar1.setVisivel(false);
 		}
+
 	}
 
 	@Override
