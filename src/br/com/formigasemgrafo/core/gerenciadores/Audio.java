@@ -37,12 +37,8 @@ public class Audio {
 	}
 
 	public AudioClip getFonte(String nome) {
-		if (audios.containsKey(nome)) {
-			return audios.get(nome);
-		} else {
-			throw new RuntimeException(String.format("O audio \"%s\" não se encontra no cache de audios do sistema. "
-					+ "Tente carrega-ló antes de acessa-ló. ", nome));
-		}
+		return audios.get(nome);
+
 	}
 
 }

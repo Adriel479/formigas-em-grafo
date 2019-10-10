@@ -51,14 +51,9 @@ public class Fonte {
 			}
 		}
 	}
-	
+
 	public Font getFonte(String nome) {
-		if (fontes.containsKey(nome)) {
-			return fontes.get(nome);
-		} else {
-			throw new RuntimeException(String.format("A fonte \"%s\" não se encontra no cache de fontes do sistema. "
-					+ "Tente carrega-lá antes de acessa-lá. ", nome));
-		}
+		return fontes.get(nome);
 	}
 
 }

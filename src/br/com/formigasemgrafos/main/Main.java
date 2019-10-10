@@ -20,7 +20,6 @@ public class Main {
 		formigasEmGrafo.adicionarCena("mapaProtecao", new MapaProtecao());
 		formigasEmGrafo.setCenaAtual("menuPrincipal");
 		formigasEmGrafo.executarJogo();
-
 	}
 
 }

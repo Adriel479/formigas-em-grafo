@@ -33,7 +33,7 @@ public class Mapa {
 		return mapa;
 	}
 
-	public MapaSprite getGrupoSprite(String nomeDoAgrupamentoDeSprite) {
+	public MapaSprite getMapaDeSprite(String nomeDoAgrupamentoDeSprite) {
 		return mapas.get(nomeDoAgrupamentoDeSprite);
 	}
 
@@ -83,7 +83,8 @@ public class Mapa {
 						String segundaStringIntermediaria = matcherLocal.group();
 						segundaStringIntermediaria = segundaStringIntermediaria.substring(
 								segundaStringIntermediaria.indexOf("\"") + 3, segundaStringIntermediaria.length() - 1);
-						Imagem.getInstancia().carregarImagem(""+(Integer.parseInt(stringIntermediaria) + 1), segundaStringIntermediaria);
+						Imagem.getInstancia().carregarImagem("" + (Integer.parseInt(stringIntermediaria) + 1),
+								segundaStringIntermediaria);
 					} else {
 						throw new RuntimeException(
 								String.format("O arquivo %s não se encontra no formato esperado!", caminho));
