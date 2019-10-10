@@ -43,12 +43,7 @@ public class Imagem {
 	}
 
 	public BufferedImage getImagem(String nome) {
-		if (imagens.containsKey(nome)) {
-			return imagens.get(nome);
-		} else {
-			throw new RuntimeException(String.format("A imagem \"%s\" não se encontra no cache de imagens do sistema. "
-					+ "Tente carrega-lá antes de acessa-lá. ", nome));
-		}
+		return imagens.get(nome);
 	}
 
 }

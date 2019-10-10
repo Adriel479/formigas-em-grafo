@@ -4,11 +4,11 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgrupamentoSprite implements Renderizavel{
+public class MapaSprite implements Renderizavel{
 
 	private List<Camada> camadas;
 	
-	public AgrupamentoSprite(int numeroDeCamadas) {
+	public MapaSprite(int numeroDeCamadas) {
 		camadas = new ArrayList<Camada>(numeroDeCamadas);
 	}
 	

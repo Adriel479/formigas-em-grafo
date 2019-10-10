@@ -1,5 +1,7 @@
 package br.com.formigasemgrafos.main;
 
+import java.io.FileNotFoundException;
+
 import br.com.formigasemgrafo.cenas.DefinicaoDeGrafo;
 import br.com.formigasemgrafo.cenas.Desafios;
 import br.com.formigasemgrafo.cenas.MapaAlimentacao;
@@ -9,7 +11,7 @@ import br.com.formigasemgrafo.core.Jogo;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		Jogo formigasEmGrafo = new Jogo();
 		formigasEmGrafo.adicionarCena("menuPrincipal", new Menu());
 		formigasEmGrafo.adicionarCena("definicaoDeGrafo", new DefinicaoDeGrafo());
@@ -18,6 +20,7 @@ public class Main {
 		formigasEmGrafo.adicionarCena("mapaProtecao", new MapaProtecao());
 		formigasEmGrafo.setCenaAtual("menuPrincipal");
 		formigasEmGrafo.executarJogo();
+
 	}
 
 }

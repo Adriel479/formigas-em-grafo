@@ -10,10 +10,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import br.com.formigasemgrafo.core.gerenciadores.Audio;
 import br.com.formigasemgrafo.core.gerenciadores.Entrada;
-import br.com.formigasemgrafo.core.gerenciadores.Fonte;
-import br.com.formigasemgrafo.core.gerenciadores.Imagem;
 
 public class Jogo {
 
@@ -21,9 +18,6 @@ public class Jogo {
 	private BufferStrategy estrategiaDeRenderizacao;
 	private boolean estadoDoJogo;
 	Entrada entrada;
-	Imagem imagem;
-	Audio audio;
-	Fonte fonte;
 	private Map<String, Cena> cenas;
 	private Cena cenaAtual;
 	private boolean novaCena;
@@ -34,9 +28,7 @@ public class Jogo {
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		estadoDoJogo = false;
 		entrada = Entrada.getInstancia();
-		imagem = Imagem.getInstancia();
-		audio = Audio.getInstancia();
-		fonte = Fonte.getInstancia();
+
 		janela.addKeyListener(entrada);
 		janela.addMouseListener(entrada);
 		janela.addMouseMotionListener(entrada);
@@ -48,11 +40,6 @@ public class Jogo {
 		});
 		cenas = new HashMap<String, Cena>();
 		janela.setLocationRelativeTo(null);
-		janela.setIgnoreRepaint(true);
-		janela.setUndecorated(true);
-		janela.setVisible(true);
-		janela.createBufferStrategy(2);
-		estrategiaDeRenderizacao = janela.getBufferStrategy();
 	}
 
 	public void adicionarCena(String nome, Cena cena) {
@@ -63,6 +50,11 @@ public class Jogo {
 	}
 
 	private void carregaDados() {
+		janela.setIgnoreRepaint(true);
+		janela.setUndecorated(true);
+		janela.setVisible(true);
+		janela.createBufferStrategy(2);
+		estrategiaDeRenderizacao = janela.getBufferStrategy();
 		for (String chaves : cenas.keySet()) {
 			cenas.get(chaves).carregar();
 		}

@@ -3,6 +3,7 @@ package br.com.formigasemgrafo.core;
 import java.awt.AlphaComposite;
 import java.awt.Composite;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import br.com.formigasemgrafo.core.gerenciadores.Imagem;
 
@@ -15,7 +16,7 @@ public class Camada implements Renderizavel {
 	private boolean visivel;
 
 	public Camada(int numeroDeLinhas, int numeroDeColunas) {
-		this(numeroDeLinhas, numeroDeColunas, 0, 0, 0, false);
+		this(numeroDeLinhas, numeroDeColunas, 0, 0, 0, true);
 	}
 
 	public Camada(int numeroDeLinhas, int numeroDeColunas, int comprimento, int altura, float opcacidade,
@@ -27,14 +28,16 @@ public class Camada implements Renderizavel {
 		setVisivel(visivel);
 	}
 
-	public void configurarElementosDaCamada(int[] nomeDosElementos) {
+	public void configurarElementosDaCamada(Object[] nomeDosElementos) {
 		int k = 0;
 		int x = 0;
 		int y = 0;
 		Imagem imagem = Imagem.getInstancia();
+		BufferedImage img = null;
 		for (int i = 0; i < elementosDaCamada.length; i++) {
 			for (int j = 0; j < elementosDaCamada[i].length; j++) {
-				elementosDaCamada[i][j] = new Sprite(x, y, imagem.getImagem(String.valueOf(nomeDosElementos[k++])));
+				if ((img = imagem.getImagem(nomeDosElementos[k++].toString())) != null)
+					elementosDaCamada[i][j] = new Sprite(x, y, img);
 				x += this.getComprimentoSprite();
 			}
 			x = 0;
@@ -46,10 +49,11 @@ public class Camada implements Renderizavel {
 	public void renderizeme(Graphics2D g) {
 		if (isVisivel()) {
 			Composite cacheComposite = g.getComposite();
-			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_IN, getOpacidade()));
+			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, getOpacidade()));
 			for (int i = 0; i < elementosDaCamada.length; i++) {
-				for (int j = 0; j < elementosDaCamada[i].length; i++) {
-					elementosDaCamada[i][j].renderizeme(g);
+				for (int j = 0; j < elementosDaCamada[i].length; j++) {
+					if (elementosDaCamada[i][j] != null)
+						elementosDaCamada[i][j].renderizeme(g);
 				}
 			}
 			g.setComposite(cacheComposite);
