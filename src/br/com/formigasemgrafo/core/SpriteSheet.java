@@ -1,6 +1,5 @@
 package br.com.formigasemgrafo.core;
 
-import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -13,7 +12,6 @@ public class SpriteSheet extends Sprite {
 	private Map<String, Animacao> animacoes;
 	private Animacao animacao;
 	private int proximoQuadro;
-	private double rotacao = 0.0;
 
 	/* O comprimento e a largura se referem as dimensões de um único quadro */
 
@@ -39,10 +37,7 @@ public class SpriteSheet extends Sprite {
 		if (isVisivel()) {
 			BufferedImage img = imagem.getSubimage(animacao.getX() + comprimento * animacao.getQuadros()[proximoQuadro],
 					animacao.getY(), comprimento, largura);
-			Composite aux = g.getComposite();
-			g.rotate(rotacao, x-comprimento, y-largura);
 			g.drawImage(img, x, y, null);
-			g.setComposite(aux);
 		}
 		proximoQuadro++;
 		if (proximoQuadro == animacao.getQuadros().length)
@@ -78,9 +73,4 @@ public class SpriteSheet extends Sprite {
 			proximoQuadro = 0;
 		}
 	}
-
-	public void rotacionar(double angulo) {
-		this.rotacao = Math.toRadians(angulo);
-	}
-
 }

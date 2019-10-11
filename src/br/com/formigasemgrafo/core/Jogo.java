@@ -65,12 +65,12 @@ public class Jogo {
 		cenaAtual.criar();
 		estadoDoJogo = true;
 		while (estadoDoJogo) {
+			entrada.atualizaCache();
 			if (isNovaCena()) {
 				cenaAtual.descarregar();
 				cenaAtual.carregar();
 				cenaAtual.criar();
 			}
-			entrada.atualizaCache();
 			atualizarJogo();
 			try {
 				Thread.sleep(50);
@@ -78,7 +78,7 @@ public class Jogo {
 				e.printStackTrace();
 			}
 			renderizarJogo();
-
+			
 		}
 		descarregarDados();
 	}

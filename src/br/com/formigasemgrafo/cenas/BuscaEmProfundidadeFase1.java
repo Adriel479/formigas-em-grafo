@@ -10,7 +10,6 @@ public class BuscaEmProfundidadeFase1 extends Cena {
 
 	private SpriteSheet sprite;
 	private int velocidade = 10;
-	private int orientacao = 2;
 
 	@Override
 	public void carregar() {
@@ -23,22 +22,16 @@ public class BuscaEmProfundidadeFase1 extends Cena {
 		if (entrada.isTeclaPressionada(KeyEvent.VK_UP)) {
 			sprite.setY(sprite.getY() - velocidade);
 			sprite.executarAnimacao("movimento");
-			if (orientacao == 1) {
-				sprite.rotacionar(360);
-				orientacao = 2;
-			}
 		} else if (entrada.isTeclaPressionada(KeyEvent.VK_DOWN)) {
-			if (orientacao == 2) {
-				sprite.rotacionar(177);
-				orientacao = 1;
-			}
 			sprite.setY(sprite.getY() + velocidade);
 			sprite.executarAnimacao("movimento");
-		} else if (entrada.isTeclaPressionada(KeyEvent.VK_SPACE)) {
+		} else  if (entrada.isTeclaPressionada(KeyEvent.VK_SPACE)) {
 			sprite.executarAnimacao("ataque");
-		} else {
+		}else {
 			sprite.executarAnimacao("normal");
 		}
+		
+	
 	}
 
 	@Override
