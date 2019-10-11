@@ -73,7 +73,7 @@ public class Jogo {
 			entrada.atualizaCache();
 			atualizarJogo();
 			try {
-				Thread.sleep(17);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

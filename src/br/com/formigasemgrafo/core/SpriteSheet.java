@@ -1,5 +1,6 @@
 package br.com.formigasemgrafo.core;
 
+import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -12,9 +13,10 @@ public class SpriteSheet extends Sprite {
 	private Map<String, Animacao> animacoes;
 	private Animacao animacao;
 	private int proximoQuadro;
+	private double rotacao = 0.0;
 
 	/* O comprimento e a largura se referem as dimensões de um único quadro */
-	
+
 	public SpriteSheet(int x, int y, BufferedImage imagem, int comprimento, int largura) {
 		super(x, y, imagem);
 		this.setComprimento(comprimento);
@@ -35,10 +37,16 @@ public class SpriteSheet extends Sprite {
 	@Override
 	public void renderizeme(Graphics2D g) {
 		if (isVisivel()) {
-			g.drawImage(imagem.getSubimage(animacao.getX() + comprimento * animacao.getQuadros()[proximoQuadro],
-					animacao.getY(), comprimento, largura), x, y, null);
+			BufferedImage img = imagem.getSubimage(animacao.getX() + comprimento * animacao.getQuadros()[proximoQuadro],
+					animacao.getY(), comprimento, largura);
+			Composite aux = g.getComposite();
+			g.rotate(rotacao, x-comprimento, y-largura);
+			g.drawImage(img, x, y, null);
+			g.setComposite(aux);
 		}
 		proximoQuadro++;
+		if (proximoQuadro == animacao.getQuadros().length)
+			proximoQuadro = 0;
 	}
 
 	@Override
@@ -64,8 +72,15 @@ public class SpriteSheet extends Sprite {
 	}
 
 	public void executarAnimacao(String nome) {
-		animacao = animacoes.get(nome);
-		proximoQuadro = 0;
+		Animacao animacaoAux = animacoes.get(nome);
+		if (animacao != animacaoAux) {
+			animacao = animacaoAux;
+			proximoQuadro = 0;
+		}
+	}
+
+	public void rotacionar(double angulo) {
+		this.rotacao = Math.toRadians(angulo);
 	}
 
 }
