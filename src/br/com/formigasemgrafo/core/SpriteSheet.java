@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class SpriteSheet extends Sprite {
 
-	private int comprimento;
-	private int largura;
+	private int comprimentoElemento;
+	private int larguraElemento;
 	private Map<String, Animacao> animacoes;
 	private Animacao animacao;
 	private int proximoQuadro;
@@ -17,7 +17,8 @@ public class SpriteSheet extends Sprite {
 
 	public SpriteSheet(int x, int y, BufferedImage imagem, int comprimento, int largura) {
 		super(x, y, imagem);
-		this.setComprimento(comprimento);
+		comprimentoElemento = comprimento;
+		larguraElemento = largura;
 		this.setLargura(largura);
 		this.animacoes = new HashMap<String, Animacao>();
 	}
@@ -35,9 +36,10 @@ public class SpriteSheet extends Sprite {
 	@Override
 	public void renderizeme(Graphics2D g) {
 		if (isVisivel()) {
-			BufferedImage img = imagem.getSubimage(animacao.getX() + comprimento * animacao.getQuadros()[proximoQuadro],
-					animacao.getY(), comprimento, largura);
-			g.drawImage(img, x, y, null);
+			BufferedImage img = imagem.getSubimage(
+					animacao.getX() + comprimentoElemento * animacao.getQuadros()[proximoQuadro], animacao.getY(),
+					comprimentoElemento, larguraElemento);
+			g.drawImage(img, x, y, getComprimento(), getLargura(), null);
 		}
 		proximoQuadro++;
 		if (proximoQuadro == animacao.getQuadros().length)
@@ -73,4 +75,5 @@ public class SpriteSheet extends Sprite {
 			proximoQuadro = 0;
 		}
 	}
+
 }

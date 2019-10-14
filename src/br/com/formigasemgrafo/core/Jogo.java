@@ -78,7 +78,7 @@ public class Jogo {
 				e.printStackTrace();
 			}
 			renderizarJogo();
-			
+
 		}
 		descarregarDados();
 	}
@@ -125,6 +125,14 @@ public class Jogo {
 
 	public void setNovaCena(boolean novaCena) {
 		this.novaCena = novaCena;
+	}
+
+	public int getComprimento() {
+		return janela.getWidth();
+	}
+
+	public int getLargura() {
+		return janela.getHeight();
 	}
 
 }

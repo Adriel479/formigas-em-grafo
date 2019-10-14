@@ -9,7 +9,7 @@ import br.com.formigasemgrafo.core.gerenciadores.Imagem;
 
 public class Camada implements Renderizavel {
 
-	private Sprite[][] elementosDaCamada;
+	Sprite[][] elementosDaCamada;
 	private int comprimentoSprite;
 	private int alturaSprite;
 	private float opacidade;
@@ -17,6 +17,16 @@ public class Camada implements Renderizavel {
 
 	public Camada(int numeroDeLinhas, int numeroDeColunas) {
 		this(numeroDeLinhas, numeroDeColunas, 0, 0, 0, true);
+	}
+
+	public void criarAreaRetangular(String nome, int x, int y, int comprimento, int largura) {
+		for (int i = 0; i < elementosDaCamada.length; i++) {
+			for (int j = 0; j < elementosDaCamada[i].length; j++) {
+				if (elementosDaCamada[i][j] != null) {
+					elementosDaCamada[i][j].criarAreaRetangular(nome, x, y, comprimento, largura);
+				}
+			}
+		}
 	}
 
 	public Camada(int numeroDeLinhas, int numeroDeColunas, int comprimento, int altura, float opcacidade,
@@ -35,9 +45,10 @@ public class Camada implements Renderizavel {
 		Imagem imagem = Imagem.getInstancia();
 		BufferedImage img = null;
 		for (int i = 0; i < elementosDaCamada.length; i++) {
-			for (int j = 0; j < elementosDaCamada[i].length; j++) {
-				if ((img = imagem.getImagem(nomeDosElementos[k++].toString())) != null)
+			for (int j = 0; j < elementosDaCamada[0].length; j++) {
+				if ((img = imagem.getImagem(nomeDosElementos[k++].toString())) != null) {
 					elementosDaCamada[i][j] = new Sprite(x, y, img);
+				}
 				x += this.getComprimentoSprite();
 			}
 			x = 0;

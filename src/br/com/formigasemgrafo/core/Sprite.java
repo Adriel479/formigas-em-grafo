@@ -1,36 +1,58 @@
 package br.com.formigasemgrafo.core;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Sprite implements Renderizavel{
+public class Sprite implements Renderizavel {
 
 	protected int x;
 	protected int y;
+	protected int comprimento;
+	protected int largura;
 	protected BufferedImage imagem;
 	protected boolean visivel;
+	Map<String, Rectangle2D.Float> areasDeColisao;
 
 	public Sprite(int x, int y, BufferedImage imagem) {
 		this.x = x;
 		this.y = y;
 		this.setImagem(imagem);
 		this.visivel = true;
+		areasDeColisao = new HashMap<String, Rectangle2D.Float>();
+
+	}
+
+	public void redimensionar(int comprimento, int largura) {
+		this.comprimento = comprimento;
+		this.largura = largura;
+	}
+
+	public void criarAreaRetangular(String nome, int x, int y, int comprimento, int largura) {
+		areasDeColisao.put(nome, new Rectangle2D.Float(this.x + x, this.y + y, comprimento, largura));
+	}
+
+	public Rectangle2D.Float getArea(String nome) {
+		return areasDeColisao.get(nome);
 	}
 
 	public int getX() {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void deslocarXY(int deslocamentoX, int deslocamentoY) {
+		this.x += deslocamentoX;
+		this.y += deslocamentoY;
+		for (Rectangle2D.Float areaDeColisao : areasDeColisao.values()) {
+			areaDeColisao.x += deslocamentoX;
+			areaDeColisao.y += deslocamentoY;
+		}
 	}
 
 	public void renderizeme(Graphics2D g) {
@@ -40,6 +62,8 @@ public class Sprite implements Renderizavel{
 
 	public void setImagem(BufferedImage imagem) {
 		this.imagem = imagem;
+		comprimento = imagem.getWidth();
+		largura = imagem.getHeight();
 	}
 
 	public boolean isVisivel() {
@@ -51,11 +75,11 @@ public class Sprite implements Renderizavel{
 	}
 
 	public int getComprimento() {
-		return this.imagem.getWidth();
+		return this.comprimento;
 	}
 
 	public int getLargura() {
-		return this.imagem.getHeight();
+		return this.largura;
 	}
 
 }

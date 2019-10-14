@@ -77,4 +77,12 @@ public abstract class Cena {
 		atributosCompatilhados.remove(nomeDoAtributo);
 	}
 
+	public int getComprimento() {
+		return jogo.getComprimento();
+	}
+
+	public int getLargura() {
+		return jogo.getLargura();
+	}
+
 }
