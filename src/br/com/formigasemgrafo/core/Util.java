@@ -1,5 +1,7 @@
 package br.com.formigasemgrafo.core;
 
+import br.com.formigasemgrafo.core.gerenciadores.Imagem;
+
 public class Util {
 
 	public static boolean mouseEntrouNaAreaDoSpite(int x, int y, Sprite sprite) {
@@ -29,6 +31,19 @@ public class Util {
 		return false;
 	}
 
+	public static boolean houveInterseccao(Sprite sprite, String nomeDaArea, Camada camada, String nomeImagem) {
+		for (int i = 0; i < camada.elementosDaCamada.length; i++) {
+			for (int j = 0; j < camada.elementosDaCamada[0].length; j++) {
+				if (camada.elementosDaCamada[i][j] != null && camada.elementosDaCamada[i][j].imagem == Imagem.getInstancia().getImagem(nomeImagem)) {
+					if (camada.elementosDaCamada[i][j].getArea(nomeDaArea).intersects(sprite.getX(), sprite.getY(),
+							sprite.getComprimento(), sprite.getLargura()))
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public static boolean houveInterseccao(String nomeDaArea0, Sprite sprite, String nomeDaArea1, Camada camada) {
 		for (int i = 0; i < camada.elementosDaCamada.length; i++) {
 			for (int j = 0; j < camada.elementosDaCamada[0].length; j++) {
