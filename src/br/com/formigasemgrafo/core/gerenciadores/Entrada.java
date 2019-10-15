@@ -29,6 +29,10 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 	public static Entrada getInstancia() {
 		return entrada;
 	}
+	
+	public void limpar() {
+		cacheMapaDeTeclas.clear();
+	}
 
 	@Override
 	public void keyPressed(KeyEvent evento) {
@@ -64,7 +68,7 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 	}
 
 	public boolean isClique() {
-		return mapaDeTeclas.containsKey(MouseEvent.BUTTON1) && mapaDeTeclas.get(MouseEvent.BUTTON1) == PRESSIONADA;
+		return cacheMapaDeTeclas.containsKey(MouseEvent.BUTTON1) && cacheMapaDeTeclas.get(MouseEvent.BUTTON1) == PRESSIONADA;
 	}
 
 	@Override

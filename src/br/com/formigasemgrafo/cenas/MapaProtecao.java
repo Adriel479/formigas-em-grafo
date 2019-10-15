@@ -19,14 +19,14 @@ public class MapaProtecao extends Cena {
 	private Sprite botaoVoltar1;
 
 	@Override
-	public void carregar() {
+	public void onCarregar() {
 		imagem.carregarImagem("fundoMapaProtecao", "/assets/fasesProtecao.png");
 		imagem.carregarImagem("botaoVoltar0", "/assets/botaoVoltar0.png");
 		imagem.carregarImagem("botaoVoltar1", "/assets/botaoVoltar1.png");
 	}
 
 	@Override
-	public void atualizar() {
+	public void onAtualizar() {
 		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoVoltar0)) {
 			botaoVoltar0.setVisivel(false);
 			botaoVoltar1.setVisivel(true);
@@ -40,7 +40,7 @@ public class MapaProtecao extends Cena {
 	}
 
 	@Override
-	public void criar() {
+	public void onCriar() {
 		fundoMapaProtecao = new Sprite(0, 0, imagem.getImagem("fundoMapaProtecao")) {
 			/*
 			 * Modificações no objeto de renderização devem ser removidas após o uso para
@@ -85,7 +85,7 @@ public class MapaProtecao extends Cena {
 	}
 
 	@Override
-	public void descarregar() {
+	public void onDescarregar() {
 
 	}
 

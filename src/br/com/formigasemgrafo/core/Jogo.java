@@ -67,18 +67,19 @@ public class Jogo {
 		while (estadoDoJogo) {
 			entrada.atualizaCache();
 			if (isNovaCena()) {
-				cenaAtual.descarregar();
 				cenaAtual.carregar();
 				cenaAtual.criar();
+				novaCena = false;
+				entrada.limpar();
 			}
+			renderizarJogo();
 			atualizarJogo();
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			renderizarJogo();
-
+			
 		}
 		descarregarDados();
 	}

@@ -22,7 +22,7 @@ public abstract class Cena {
 	private String proximaCena = null;
 	private List<Renderizavel> objetosRenderizaveis;
 	private Jogo jogo;
-	private Map<String, Object> atributosCompatilhados;
+	private static Map<String, Object> atributosCompatilhados;
 
 	public Cena() {
 		objetosRenderizaveis = new ArrayList<Renderizavel>();
@@ -33,19 +33,33 @@ public abstract class Cena {
 		mapa = Mapa.getInstancia();
 	}
 
-	public abstract void carregar();
+	public void carregar() {
+		onCarregar();
+	}
 
-	public abstract void atualizar();
+	public void atualizar() {
+		onAtualizar();
+	}
 
-	public abstract void criar();
-
+	public void criar() {
+		onCriar();
+	}
+	
+	public void descarregar() {
+		onDescarregar();
+		objetosRenderizaveis.clear();
+	}
+	
 	public void renderizar(Graphics2D g) {
 		for (Renderizavel objetoRenderizavel : objetosRenderizaveis) {
 			objetoRenderizavel.renderizeme(g);
 		}
 	}
 
-	public abstract void descarregar();
+	public abstract void onCarregar();
+	public abstract void onCriar();
+	public abstract void onAtualizar();
+	public abstract void onDescarregar();
 
 	void configurarGerentes(Jogo jogo) {
 		entrada = jogo.entrada;
@@ -58,7 +72,9 @@ public abstract class Cena {
 
 	public void executarCena(String proximaCena) {
 		jogo.setNovaCena(true);
+		jogo.getCenaAtual().descarregar();
 		jogo.setCenaAtual(proximaCena);
+		
 	}
 
 	public void adicionarObjetoRenderizavel(Renderizavel objetoRenderizavel) {

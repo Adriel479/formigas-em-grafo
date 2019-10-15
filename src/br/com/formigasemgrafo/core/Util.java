@@ -1,5 +1,7 @@
 package br.com.formigasemgrafo.core;
 
+import java.awt.Shape;
+
 import br.com.formigasemgrafo.core.gerenciadores.Imagem;
 
 public class Util {
@@ -8,6 +10,14 @@ public class Util {
 		if (sprite != null) {
 			return x >= sprite.getX() && x <= sprite.getX() + sprite.getComprimento() && y >= sprite.getY()
 					&& y <= sprite.getY() + sprite.getLargura();
+		} else {
+			return false;
+		}
+	}
+	
+	public static boolean mouseEntrouNaAreaDaForma(int x, int y, Shape forma) {
+		if (forma != null) {
+			return forma.contains(x, y);
 		} else {
 			return false;
 		}

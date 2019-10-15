@@ -12,7 +12,7 @@ public class DefinicaoDeGrafo extends Cena {
 	private Sprite botaoProximo1;
 
 	@Override
-	public void carregar() {
+	public void onCarregar() {
 		imagem.carregarImagem("grafo", "/assets/grafo.png");
 		imagem.carregarImagem("botaoProximo0", "/assets/botaoProximo0.png");
 		imagem.carregarImagem("botaoProximo1", "/assets/botaoProximo1.png");
@@ -21,7 +21,7 @@ public class DefinicaoDeGrafo extends Cena {
 	}
 
 	@Override
-	public void atualizar() {
+	public void onAtualizar() {
 		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoProximo0)) {
 			botaoProximo0.setVisivel(false);
 			botaoProximo1.setVisivel(true);
@@ -46,7 +46,7 @@ public class DefinicaoDeGrafo extends Cena {
 	}
 
 	@Override
-	public void criar() {
+	public void onCriar() {
 		botaoVoltar0 = new Sprite(99, 481, imagem.getImagem("botaoVoltar0"));
 		botaoVoltar1 = new Sprite(99, 481, imagem.getImagem("botaoVoltar1"));
 		botaoProximo0 = new Sprite(450, 481, imagem.getImagem("botaoProximo0"));
@@ -63,7 +63,7 @@ public class DefinicaoDeGrafo extends Cena {
 	}
 
 	@Override
-	public void descarregar() {
+	public void onDescarregar() {
 
 	}
 

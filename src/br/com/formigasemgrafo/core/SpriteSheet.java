@@ -19,6 +19,7 @@ public class SpriteSheet extends Sprite {
 		super(x, y, imagem);
 		comprimentoElemento = comprimento;
 		larguraElemento = largura;
+		this.setComprimento(comprimento);
 		this.setLargura(largura);
 		this.animacoes = new HashMap<String, Animacao>();
 	}
@@ -42,7 +43,7 @@ public class SpriteSheet extends Sprite {
 			g.drawImage(img, x, y, getComprimento(), getLargura(), null);
 		}
 		proximoQuadro++;
-		if (proximoQuadro == animacao.getQuadros().length)
+		if (proximoQuadro >= animacao.getQuadros().length)
 			proximoQuadro = 0;
 	}
 

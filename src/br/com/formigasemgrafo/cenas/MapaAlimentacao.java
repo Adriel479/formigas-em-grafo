@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 
 import br.com.formigasemgrafo.core.Cena;
 import br.com.formigasemgrafo.core.Sprite;
@@ -14,19 +15,19 @@ public class MapaAlimentacao extends Cena {
 
 	private Sprite fundoMapaAlimentacao;
 	private Ellipse2D.Float[] fases;
-	private boolean[] estadoDasFasesDoDesafioDeAlimentacao;
+	private ArrayList<Boolean> estadoDasFasesDoDesafioDeAlimentacao;
 	private Sprite botaoVoltar0;
 	private Sprite botaoVoltar1;
 
 	@Override
-	public void carregar() {
+	public void onCarregar() {
 		imagem.carregarImagem("fundoMapaAlimentacao", "/assets/fasesAlimentacao.png");
 		imagem.carregarImagem("botaoVoltar0", "/assets/botaoVoltar0.png");
 		imagem.carregarImagem("botaoVoltar1", "/assets/botaoVoltar1.png");
 	}
 
 	@Override
-	public void atualizar() {
+	public void onAtualizar() {
 		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoVoltar0)) {
 			botaoVoltar0.setVisivel(false);
 			botaoVoltar1.setVisivel(true);
@@ -38,10 +39,17 @@ public class MapaAlimentacao extends Cena {
 			botaoVoltar1.setVisivel(false);
 		}
 
+		for (int i = 0; i < estadoDasFasesDoDesafioDeAlimentacao.size(); i++) {
+			if (Util.mouseEntrouNaAreaDaForma(entrada.getX(), entrada.getY(), fases[i]) && entrada.isClique()
+					&& estadoDasFasesDoDesafioDeAlimentacao.get(i)) {
+				executarCena("fase" + (i + 1) + "BuscaEmProfundidade");
+			}
+		}
+
 	}
 
 	@Override
-	public void criar() {
+	public void onCriar() {
 		fundoMapaAlimentacao = new Sprite(0, 0, imagem.getImagem("fundoMapaAlimentacao")) {
 			/*
 			 * Modificações no objeto de renderização devem ser removidas após o uso para
@@ -57,8 +65,8 @@ public class MapaAlimentacao extends Cena {
 				Composite cacheComposite = g.getComposite();
 				g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 				g.setColor(new Color(231, 70, 40));
-				for (int i = 0; i < estadoDasFasesDoDesafioDeAlimentacao.length; i++) {
-					if (!estadoDasFasesDoDesafioDeAlimentacao[i]) {
+				for (int i = 0; i < estadoDasFasesDoDesafioDeAlimentacao.size(); i++) {
+					if (!estadoDasFasesDoDesafioDeAlimentacao.get(i)) {
 						g.fill(fases[i]);
 					}
 				}
@@ -66,15 +74,23 @@ public class MapaAlimentacao extends Cena {
 			}
 		};
 		adicionarObjetoRenderizavel(fundoMapaAlimentacao);
-		fases = new Ellipse2D.Float[5];
-		estadoDasFasesDoDesafioDeAlimentacao = new boolean[5];
+		fases = new Ellipse2D.Float[6];
 
-		fases[0] = new Ellipse2D.Float(360, 200, 80, 80);
-		fases[1] = new Ellipse2D.Float(580, 200, 80, 80);
-		fases[2] = new Ellipse2D.Float(160, 340, 80, 80);
-		fases[3] = new Ellipse2D.Float(360, 340, 80, 80);
-		fases[4] = new Ellipse2D.Float(580, 340, 80, 80);
-		adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeAlimentacao", estadoDasFasesDoDesafioDeAlimentacao);
+		if (estadoDasFasesDoDesafioDeAlimentacao == null) {
+			estadoDasFasesDoDesafioDeAlimentacao = new ArrayList<Boolean>(6);
+			estadoDasFasesDoDesafioDeAlimentacao.add(true);
+			for (int i = 1; i < 6; i++)
+				estadoDasFasesDoDesafioDeAlimentacao.add(false);
+			adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeAlimentacao",
+					estadoDasFasesDoDesafioDeAlimentacao);
+		}
+
+		fases[0] = new Ellipse2D.Float(160, 200, 80, 80);
+		fases[1] = new Ellipse2D.Float(360, 200, 80, 80);
+		fases[2] = new Ellipse2D.Float(580, 200, 80, 80);
+		fases[3] = new Ellipse2D.Float(160, 340, 80, 80);
+		fases[4] = new Ellipse2D.Float(360, 340, 80, 80);
+		fases[5] = new Ellipse2D.Float(580, 340, 80, 80);
 
 		botaoVoltar0 = new Sprite(278, 464, imagem.getImagem("botaoVoltar0"));
 		botaoVoltar1 = new Sprite(278, 464, imagem.getImagem("botaoVoltar1"));
@@ -83,11 +99,10 @@ public class MapaAlimentacao extends Cena {
 
 		adicionarObjetoRenderizavel(botaoVoltar0);
 		adicionarObjetoRenderizavel(botaoVoltar1);
-
 	}
 
 	@Override
-	public void descarregar() {
+	public void onDescarregar() {
 
 	}
 

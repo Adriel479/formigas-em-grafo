@@ -13,7 +13,7 @@ public class Menu extends Cena {
 	private Sprite botaoIniciar1;
 
 	@Override
-	public void carregar() {
+	public void onCarregar() {
 		imagem.carregarImagem("fundoMenu", "/assets/menu.png");
 		imagem.carregarImagem("botaoCredito0", "/assets/botaoCredito0.png");
 		imagem.carregarImagem("botaoCredito1", "/assets/botaoCredito1.png");
@@ -22,7 +22,7 @@ public class Menu extends Cena {
 	}
 
 	@Override
-	public void atualizar() {
+	public void onAtualizar() {
 		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoIniciar0)) {
 			botaoIniciar0.setVisivel(false);
 			botaoIniciar1.setVisivel(true);
@@ -44,7 +44,7 @@ public class Menu extends Cena {
 	}
 
 	@Override
-	public void criar() {
+	public void onCriar() {
 		fundoMenu = new Sprite(0, 0, imagem.getImagem("fundoMenu"));
 		botaoIniciar0 = new Sprite(273, 437, imagem.getImagem("botaoIniciar0"));
 		botaoIniciar1 = new Sprite(273, 437, imagem.getImagem("botaoIniciar1"));
@@ -62,7 +62,7 @@ public class Menu extends Cena {
 	}
 
 	@Override
-	public void descarregar() {
+	public void onDescarregar() {
 
 	}
 

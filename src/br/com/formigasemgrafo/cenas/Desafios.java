@@ -15,7 +15,7 @@ public class Desafios extends Cena {
 	private Sprite botaoVoltar1;
 
 	@Override
-	public void carregar() {
+	public void onCarregar() {
 		imagem.carregarImagem("fundoDesafios", "/assets/fundoDesafios.png");
 		imagem.carregarImagem("botaoAlimentacao0", "/assets/botaoAlimentacao0.png");
 		imagem.carregarImagem("botaoAlimentacao1", "/assets/botaoAlimentacao1.png");
@@ -26,7 +26,7 @@ public class Desafios extends Cena {
 	}
 
 	@Override
-	public void atualizar() {
+	public void onAtualizar() {
 		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoAlimentacao0)) {
 			botaoAlimentacao0.setVisivel(false);
 			botaoAlimentacao1.setVisivel(true);
@@ -62,7 +62,7 @@ public class Desafios extends Cena {
 	}
 
 	@Override
-	public void criar() {
+	public void onCriar() {
 		fundoDesafios = new Sprite(0, 0, imagem.getImagem("fundoDesafios"));
 		botaoAlimentacao0 = new Sprite(125, 397, imagem.getImagem("botaoAlimentacao0"));
 		botaoAlimentacao1 = new Sprite(125, 397, imagem.getImagem("botaoAlimentacao1"));
@@ -85,7 +85,7 @@ public class Desafios extends Cena {
 	}
 
 	@Override
-	public void descarregar() {
+	public void onDescarregar() {
 
 	}
 
