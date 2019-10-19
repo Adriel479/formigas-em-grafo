@@ -37,6 +37,7 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 	private Map<Point, List<Point>> mapaDeAdjacencia;
 	private Map<Point, BarraDeEnergia> mapaDeBarras;
 	private int nivelDaBarra;
+	private int nivelDaBarraInterna = 1;
 	private Integer score;
 	private SpriteSheet aranhas[];
 	private Point[] pontos;
@@ -72,11 +73,12 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 		if (!pausa) {
 			logicaParaDeixarJogadorLento();
 			logicaParaAtualizacaoDoTempoDeVidaDosFormigueiros();
-			logicaParaAlimentacaoDosFormigueiros();
-			logicaControleDoJogador();
-			logicaControleDasAranhas();
-			logicaVerificaVitoria();
-			logicaParaMatarFormiga();
+			if (!pausa) {
+				logicaParaAlimentacaoDosFormigueiros();
+				logicaControleDoJogador();
+				logicaControleDasAranhas();
+				logicaParaMatarFormiga();
+			}
 		} else if (pausa && vitoria) {
 			logicaBotaoDeProximo();
 		} else if (pausa) {
@@ -90,6 +92,7 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 		vitoria = false;
 		score = 0;
 		nivelDaBarra = 3;
+		nivelDaBarraInterna = 1;
 		deslocamentoAranha = new int[] { 5, 6 };
 		orientacaoAranhas = new Orientacao[] { Orientacao.BAIXO, Orientacao.BAIXO };
 		pontos = new Point[] { new Point(200, 150), new Point(500, 100) };
@@ -189,7 +192,8 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 		mapaDeBarras = new HashMap<Point, BarraDeEnergia>();
 		BarraDeEnergia barra = new BarraDeEnergia(360, 570, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
-		barra.setExtremo(true);
+		barra.setExtremo(false);
+		barra.corDaBarra = Color.yellow;
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(7, 11), barra);
 
@@ -240,18 +244,18 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 		barra.setExtremo(true);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(3, 9), barra);
-
 		for (BarraDeEnergia barraE : mapaDeBarras.values())
 			adicionarObjetoRenderizavel(barraE);
 		mapaDeAdjacencia = new HashMap<Point, List<Point>>();
 		mapaDeAdjacencia.put(new Point(7, 11), new ArrayList<Point>(Arrays.asList(new Point(7, 5))));
 		mapaDeAdjacencia.put(new Point(7, 5),
 				new ArrayList<Point>(Arrays.asList(new Point(3, 5), new Point(11, 5), new Point(7, 11))));
-		mapaDeAdjacencia.put(new Point(3, 5), new ArrayList<Point>(Arrays.asList(new Point(3, 2), new Point(3, 9), new Point(7, 5))));
+		mapaDeAdjacencia.put(new Point(3, 5),
+				new ArrayList<Point>(Arrays.asList(new Point(3, 2), new Point(3, 9), new Point(7, 5))));
 		mapaDeAdjacencia.put(new Point(3, 2), new ArrayList<Point>(Arrays.asList(new Point(3, 5))));
 		mapaDeAdjacencia.put(new Point(3, 9), new ArrayList<Point>(Arrays.asList(new Point(3, 5))));
-		mapaDeAdjacencia.put(new Point(11, 5),
-				new ArrayList<Point>(Arrays.asList(new Point(11, 2), new Point(11, 9), new Point(15, 5))));
+		mapaDeAdjacencia.put(new Point(11, 5), new ArrayList<Point>(
+				Arrays.asList(new Point(11, 2), new Point(11, 9), new Point(15, 5), new Point(7, 5))));
 		mapaDeAdjacencia.put(new Point(11, 2), new ArrayList<Point>(Arrays.asList(new Point(11, 5))));
 		mapaDeAdjacencia.put(new Point(11, 9), new ArrayList<Point>(Arrays.asList(new Point(11, 5))));
 		mapaDeAdjacencia.put(new Point(15, 5), new ArrayList<Point>(Arrays.asList(new Point(11, 5))));
@@ -333,27 +337,39 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 			BarraDeEnergia barra = mapaDeBarras.get(ponto);
 			if (Util.houveInterseccao("jogador", sprite, "padrao", barra) && barra.isVisivel() && barra.isExtremo()
 					&& entrada.isTeclaPressionada(KeyEvent.VK_A)) {
-				List<Point> adjacentes = mapaDeAdjacencia.get(ponto);
-				if (adjacentes.size() == 1) {
-					mapaDeAdjacencia.get(adjacentes.get(0)).remove(ponto);
-					if (mapaDeAdjacencia.get(adjacentes.get(0)).size() == 1) {
-						mapaDeBarras.get(adjacentes.get(0)).setExtremo(true);
-						mapaDeBarras.get(adjacentes.get(0)).atualizaNivelDaBarra(3);
-					} else if (mapaDeAdjacencia.get(adjacentes.get(0)).size() == 0) {
-						mapaDeBarras.get(adjacentes.get(0)).setExtremo(true);
-						mapaDeBarras.get(adjacentes.get(0)).atualizaNivelDaBarra(3);
+				if (barra.corDaBarra != Color.yellow) {
+					List<Point> adjacentes = mapaDeAdjacencia.get(ponto);
+					if (adjacentes.size() == 1) {
+						mapaDeAdjacencia.get(adjacentes.get(0)).remove(ponto);
+						if (mapaDeAdjacencia.get(adjacentes.get(0)).size() == 1) {
+							mapaDeBarras.get(adjacentes.get(0)).setExtremo(true);
+							mapaDeBarras.get(adjacentes.get(0)).atualizaNivelDaBarra(3);
+						} else if (mapaDeAdjacencia.get(adjacentes.get(0)).size() == 0) {
+							mapaDeBarras.get(adjacentes.get(0)).setExtremo(true);
+							mapaDeBarras.get(adjacentes.get(0)).atualizaNivelDaBarra(3);
+						}
+						adjacentes.remove(0);
 					}
-					adjacentes.remove(0);
+					barra.setVisivel(false);
+					score += 100;
+					break;
 				}
-				barra.setVisivel(false);
-				score += 100;
-				break;
 			} else if (Util.houveInterseccao("jogador", sprite, "padrao", barra) && barra.isVisivel()
-					&& !barra.isExtremo() && entrada.isTeclaPressionada(KeyEvent.VK_A)) {
-				nivelDaBarra += 3;
+					&& !barra.isExtremo() && entrada.isTeclaPressionada(KeyEvent.VK_A)
+
+					|| (Util.houveInterseccao("jogador", sprite, "padrao", barra) && barra.isVisivel()
+							&& entrada.isTeclaPressionada(KeyEvent.VK_A) && barra.corDaBarra == Color.yellow
+							&& score < 800)) {
+				nivelDaBarra += 5;
 				if (score - 100 >= 0)
 					score -= 100;
 				barra.setVisivel(false);
+
+			}
+
+			if (Util.houveInterseccao("jogador", sprite, "padrao", barra) && entrada.isTeclaPressionada(KeyEvent.VK_A)
+					&& barra.isVisivel() && barra.corDaBarra == Color.yellow && score == 800) {
+				executarVitoria();
 			}
 		}
 	}
@@ -365,14 +381,16 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 				if (barraDeEnergia.isExtremo())
 					barraDeEnergia.atualizaNivelDaBarra(nivelDaBarra);
 				else
-					barraDeEnergia.atualizaNivelDaBarra(1);
-				if (barraDeEnergia.getNivelDaBarra() <= 0 && barraDeEnergia.isVisivel()) {
-					pausa = true;
-					fimDeJogoFormigueiro.setVisivel(true);
-					botaoVoltar0.setVisivel(true);
-				}
+					barraDeEnergia.atualizaNivelDaBarra(nivelDaBarraInterna);
 			}
 			tempoAnterior = tempoAtual;
+		}
+		for (BarraDeEnergia barraDeEnergia : mapaDeBarras.values()) {
+			if (barraDeEnergia.getNivelDaBarra() <= 0 && barraDeEnergia.isVisivel()) {
+				pausa = true;
+				fimDeJogoFormigueiro.setVisivel(true);
+				botaoVoltar0.setVisivel(true);
+			}
 		}
 	}
 
@@ -422,17 +440,15 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 		}
 	}
 
-	private void logicaVerificaVitoria() {
-		if (score == 900) {
-			fimDeJogoVitoria.setVisivel(true);
-			botaoProximo0.setVisivel(true);
-			pausa = true;
-			vitoria = true;
-			@SuppressWarnings("unchecked")
-			ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
-					"estadoDasFasesDoDesafioDeAlimentacao");
-			estado.set(2, true);
-		}
+	private void executarVitoria() {
+		fimDeJogoVitoria.setVisivel(true);
+		botaoProximo0.setVisivel(true);
+		pausa = true;
+		vitoria = true;
+		@SuppressWarnings("unchecked")
+		ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
+				"estadoDasFasesDoDesafioDeAlimentacao");
+		estado.set(2, true);
 	}
 
 }

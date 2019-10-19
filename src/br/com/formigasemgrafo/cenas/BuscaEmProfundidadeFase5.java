@@ -21,14 +21,14 @@ import br.com.formigasemgrafo.core.Sprite;
 import br.com.formigasemgrafo.core.SpriteSheet;
 import br.com.formigasemgrafo.core.Util;
 
-public class BuscaEmProfundidadeFase3 extends Cena {
+public class BuscaEmProfundidadeFase5 extends Cena {
 
 	private enum Orientacao {
 		CIMA, BAIXO, DIREITA, ESQUERDA
 	};
 
 	private SpriteSheet sprite;
-	private int deslocamento = 10;
+	private int deslocamento = 6;
 	private Orientacao orientacaoDaFormiga;
 	private MapaSprite meuMapa;
 	private Camada camadaDeArvores;
@@ -55,7 +55,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 
 	@Override
 	public void onCarregar() {
-		mapa.carregarMapaDeSprite("mapaBPFase3", "/mapas/buscaEmProfundidadeFase3.json", "/mapas/recursos.tsx");
+		mapa.carregarMapaDeSprite("mapaBPFase5", "/mapas/buscaEmProfundidadeFase5.json", "/mapas/recursos.tsx");
 		imagem.carregarImagem("jogador", "/assets/spriteSheet.png");
 		imagem.carregarImagem("aranhas", "/assets/spriteSheetCompletoAranha.png");
 		fonte.carregarFonte("fonte", "/assets/kenvector_future_thin.ttf", 20, Font.BOLD);
@@ -93,9 +93,9 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		score = 0;
 		nivelDaBarra = 2;
 		nivelDaBarraInterna = 1;
-		deslocamentoAranha = new int[] { 6, 6 };
-		orientacaoAranhas = new Orientacao[] { Orientacao.BAIXO, Orientacao.BAIXO };
-		pontos = new Point[] { new Point(200, 150), new Point(550, 200) };
+		deslocamentoAranha = new int[] { 10, 12 };
+		orientacaoAranhas = new Orientacao[] { Orientacao.BAIXO, Orientacao.DIREITA, };
+		pontos = new Point[] { new Point(350, 200), new Point(450, 400) };
 		criarMapa();
 		criarBarrasDeVida();
 		criarAranhas();
@@ -143,7 +143,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 	}
 
 	private void criarMapa() {
-		meuMapa = mapa.getMapaDeSprite("mapaBPFase3");
+		meuMapa = mapa.getMapaDeSprite("mapaBPFase5");
 		camadaDeArvores = meuMapa.getCamada(2);
 		camadaDeGrama = meuMapa.getCamada(0);
 		camadaDeArvores.criarAreaRetangular("arvores", 5, 5, 30, 30);
@@ -152,7 +152,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 	}
 
 	private void criarJogador() {
-		sprite = new SpriteSheet(10, 255, imagem.getImagem("jogador"), 50, 50);
+		sprite = new SpriteSheet(155, 310, imagem.getImagem("jogador"), 50, 50);
 		sprite.adicionarAnimacao("animacaoCimaNormal", new Animacao(0, 0, new Integer[] { 0 }));
 		sprite.adicionarAnimacao("animacaoCimaAtaque", new Animacao(0, 0, new Integer[] { 1 }));
 		sprite.adicionarAnimacao("animacaoCimaMovimento", new Animacao(0, 0, new Integer[] { 2, 3 }));
@@ -165,8 +165,8 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		sprite.adicionarAnimacao("animacaoEsquerdaNormal", new Animacao(0, 150, new Integer[] { 0 }));
 		sprite.adicionarAnimacao("animacaoEsquerdaAtaque", new Animacao(0, 150, new Integer[] { 1 }));
 		sprite.adicionarAnimacao("animacaoEsquerdaMovimento", new Animacao(0, 150, new Integer[] { 2, 3 }));
-		sprite.executarAnimacao("animacaoDireitaNormal");
-		orientacaoDaFormiga = Orientacao.DIREITA;
+		sprite.executarAnimacao("animacaoBaixoNormal");
+		orientacaoDaFormiga = Orientacao.BAIXO;
 		sprite.redimensionar(40, 40);
 		sprite.criarAreaRetangular("jogador", 14, 5, 12, 34);
 		adicionarObjetoRenderizavel(sprite);
@@ -177,11 +177,19 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		for (int i = 0; i < aranhas.length; i++) {
 			aranhas[i] = new SpriteSheet((int) pontos[i].getX(), (int) pontos[i].getY(), imagem.getImagem("aranhas"),
 					50, 50);
-			aranhas[i].adicionarAnimacao("animacaoCimaNormal", new Animacao(0, 0, new Integer[] { 0 }));
-			aranhas[i].adicionarAnimacao("animacaoCimaMovimento", new Animacao(0, 0, new Integer[] { 1, 2 }));
-			aranhas[i].adicionarAnimacao("animacaoBaixoNormal", new Animacao(0, 50, new Integer[] { 0 }));
-			aranhas[i].adicionarAnimacao("animacaoBaixoMovimento", new Animacao(0, 50, new Integer[] { 1, 2 }));
-			aranhas[i].executarAnimacao("animacaoBaixoMovimento");
+			if (i % 2 == 0) {
+				aranhas[i].adicionarAnimacao("animacaoCimaNormal", new Animacao(0, 0, new Integer[] { 0 }));
+				aranhas[i].adicionarAnimacao("animacaoCimaMovimento", new Animacao(0, 0, new Integer[] { 1, 2 }));
+				aranhas[i].adicionarAnimacao("animacaoBaixoNormal", new Animacao(0, 50, new Integer[] { 0 }));
+				aranhas[i].adicionarAnimacao("animacaoBaixoMovimento", new Animacao(0, 50, new Integer[] { 1, 2 }));
+				aranhas[i].executarAnimacao("animacaoBaixoMovimento");
+			} else {
+				aranhas[i].adicionarAnimacao("animacaoDireitaNormal", new Animacao(0, 100, new Integer[] { 0 }));
+				aranhas[i].adicionarAnimacao("animacaoDireitaMovimento", new Animacao(0, 100, new Integer[] { 1, 2 }));
+				aranhas[i].adicionarAnimacao("animacaoEsquerdaNormal", new Animacao(0, 150, new Integer[] { 0 }));
+				aranhas[i].adicionarAnimacao("animacaoEsquerdaMovimento", new Animacao(0, 150, new Integer[] { 1, 2 }));
+				aranhas[i].executarAnimacao("animacaoDireitaMovimento");
+			}
 			aranhas[i].criarAreaRetangular("aranha", 15, 9, 20, 32);
 		}
 		for (SpriteSheet aranha : aranhas)
@@ -190,113 +198,117 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 
 	private void criarBarrasDeVida() {
 		mapaDeBarras = new HashMap<Point, BarraDeEnergia>();
-		BarraDeEnergia barra = new BarraDeEnergia(10, 270, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		BarraDeEnergia barra = new BarraDeEnergia(160, 320, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
-		barra.setExtremo(false);
 		barra.corDaBarra = Color.yellow;
+		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(0, 5), barra);
+		mapaDeBarras.put(new Point(3, 6), barra);
 
-		barra = new BarraDeEnergia(210, 270, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra = new BarraDeEnergia(160, 470, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(4, 5), barra);
+		mapaDeBarras.put(new Point(3, 9), barra);
 
-		barra = new BarraDeEnergia(210, 170, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra = new BarraDeEnergia(360, 470, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(4, 3), barra);
+		mapaDeBarras.put(new Point(7, 9), barra);
 
-		barra = new BarraDeEnergia(210, 370, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra = new BarraDeEnergia(360, 320, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(4, 7), barra);
+		mapaDeBarras.put(new Point(7, 6), barra);
 
-		barra = new BarraDeEnergia(210, 520, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra = new BarraDeEnergia(560, 320, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(4, 10), barra);
+		mapaDeBarras.put(new Point(11, 6), barra);
 
-		barra = new BarraDeEnergia(410, 520, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
-		barra.setNivelDaBarra(100);
-		barra.setExtremo(false);
-		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(8, 10), barra);
-
-		barra = new BarraDeEnergia(410, 420, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
-		barra.setNivelDaBarra(100);
-		barra.setExtremo(false);
-		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(8, 8), barra);
-
-		barra = new BarraDeEnergia(610, 420, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
-		barra.setNivelDaBarra(100);
-		barra.setExtremo(false);
-		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(12, 8), barra);
-
-		barra = new BarraDeEnergia(760, 170, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra = new BarraDeEnergia(560, 470, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(true);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(15, 3), barra);
+		mapaDeBarras.put(new Point(11, 9), barra);
 
-		barra = new BarraDeEnergia(760, 570, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra = new BarraDeEnergia(760, 320, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra.setNivelDaBarra(100);
+		barra.setExtremo(false);
+		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
+		mapaDeBarras.put(new Point(15, 6), barra);
+
+		barra = new BarraDeEnergia(760, 120, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra.setNivelDaBarra(100);
+		barra.setExtremo(false);
+		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
+		mapaDeBarras.put(new Point(15, 2), barra);
+
+		barra = new BarraDeEnergia(560, 120, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
+		barra.setNivelDaBarra(100);
+		barra.setExtremo(false);
+		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
+		mapaDeBarras.put(new Point(11, 2), barra);
+
+		barra = new BarraDeEnergia(360, 120, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(true);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(15, 11), barra);
-
-		barra = new BarraDeEnergia(460, 170, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
-		barra.setNivelDaBarra(100);
-		barra.setExtremo(false);
-		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(9, 3), barra);
-
-		barra = new BarraDeEnergia(760, 420, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
-		barra.setNivelDaBarra(100);
-		barra.setExtremo(false);
-		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
-		mapaDeBarras.put(new Point(15, 8), barra);
+		mapaDeBarras.put(new Point(7, 2), barra);
 
 		for (BarraDeEnergia barraE : mapaDeBarras.values())
 			adicionarObjetoRenderizavel(barraE);
 		mapaDeAdjacencia = new HashMap<Point, List<Point>>();
-		mapaDeAdjacencia.put(new Point(0, 5), new ArrayList<Point>(Arrays.asList(new Point(4, 5))));
-		mapaDeAdjacencia.put(new Point(15, 3), new ArrayList<Point>(Arrays.asList(new Point(9, 3))));
-		mapaDeAdjacencia.put(new Point(15, 11), new ArrayList<Point>(Arrays.asList(new Point(15, 8))));
-		mapaDeAdjacencia.put(new Point(9, 3), new ArrayList<Point>(Arrays.asList(new Point(15, 3), new Point(4, 3))));
-		mapaDeAdjacencia.put(new Point(15, 8),
-				new ArrayList<Point>(Arrays.asList(new Point(12, 8), new Point(15, 11))));
-		mapaDeAdjacencia.put(new Point(4, 3), new ArrayList<Point>(Arrays.asList(new Point(9, 3), new Point(4, 5))));
-		mapaDeAdjacencia.put(new Point(12, 8), new ArrayList<Point>(Arrays.asList(new Point(15, 8), new Point(8, 8))));
-		mapaDeAdjacencia.put(new Point(4, 5),
-				new ArrayList<Point>(Arrays.asList(new Point(0, 5), new Point(4, 3), new Point(4, 7))));
-		mapaDeAdjacencia.put(new Point(8, 8), new ArrayList<Point>(Arrays.asList(new Point(12, 8), new Point(8, 10))));
-		mapaDeAdjacencia.put(new Point(4, 7), new ArrayList<Point>(Arrays.asList(new Point(4, 5), new Point(4, 10))));
-		mapaDeAdjacencia.put(new Point(4, 10), new ArrayList<Point>(Arrays.asList(new Point(4, 7), new Point(8, 10))));
-		mapaDeAdjacencia.put(new Point(8, 10), new ArrayList<Point>(Arrays.asList(new Point(8, 8), new Point(4, 10))));
 
+		mapaDeAdjacencia.put(new Point(3, 6), new ArrayList<Point>(Arrays.asList(new Point(3, 9))));
+		mapaDeAdjacencia.put(new Point(3, 9), new ArrayList<Point>(Arrays.asList(new Point(3, 6), new Point(7, 9))));
+		mapaDeAdjacencia.put(new Point(7, 9), new ArrayList<Point>(Arrays.asList(new Point(3, 9), new Point(7, 6))));
+		mapaDeAdjacencia.put(new Point(7, 6), new ArrayList<Point>(Arrays.asList(new Point(11, 6), new Point(7, 9))));
+		mapaDeAdjacencia.put(new Point(11, 6),
+				new ArrayList<Point>(Arrays.asList(new Point(7, 6), new Point(11, 9), new Point(15, 6))));
+		mapaDeAdjacencia.put(new Point(11, 9), new ArrayList<Point>(Arrays.asList(new Point(11, 6))));
+		mapaDeAdjacencia.put(new Point(15, 6), new ArrayList<Point>(Arrays.asList(new Point(11, 6), new Point(15, 2))));
+		mapaDeAdjacencia.put(new Point(15, 2), new ArrayList<Point>(Arrays.asList(new Point(15, 6), new Point(11, 2))));
+		mapaDeAdjacencia.put(new Point(11, 2), new ArrayList<Point>(Arrays.asList(new Point(15, 2), new Point(7, 2))));
+		mapaDeAdjacencia.put(new Point(7, 2), new ArrayList<Point>(Arrays.asList(new Point(11, 2))));
 	}
 
 	private void logicaControleDasAranhas() {
 		for (int i = 0; i < aranhas.length; i++) {
-			aranhas[i].deslocarXY(0, deslocamentoAranha[i]);
-			if (Util.houveInterseccao(aranhas[i], "arvores", camadaDeArvores) || Util.foraDaCena(aranhas[i], this)) {
-				aranhas[i].deslocarXY(0, -deslocamentoAranha[i]);
-				deslocamentoAranha[i] *= -1;
-				if (orientacaoAranhas[i] == Orientacao.BAIXO) {
-					aranhas[i].executarAnimacao("animacaoCimaMovimento");
-					orientacaoAranhas[i] = Orientacao.CIMA;
-					aranhas[i].deslocarXY(0, deslocamentoAranha[i]);
-				} else {
-					aranhas[i].executarAnimacao("animacaoBaixoMovimento");
-					orientacaoAranhas[i] = Orientacao.BAIXO;
-					aranhas[i].deslocarXY(0, deslocamentoAranha[i]);
+			if (i % 2 == 0) {
+				aranhas[i].deslocarXY(0, deslocamentoAranha[i]);
+				if (Util.houveInterseccao(aranhas[i], "arvores", camadaDeArvores)
+						|| Util.foraDaCena(aranhas[i], this)) {
+					aranhas[i].deslocarXY(0, -deslocamentoAranha[i]);
+					deslocamentoAranha[i] *= -1;
+					if (orientacaoAranhas[i] == Orientacao.BAIXO) {
+						aranhas[i].executarAnimacao("animacaoCimaMovimento");
+						orientacaoAranhas[i] = Orientacao.CIMA;
+						aranhas[i].deslocarXY(0, deslocamentoAranha[i]);
+					} else {
+						aranhas[i].executarAnimacao("animacaoBaixoMovimento");
+						orientacaoAranhas[i] = Orientacao.BAIXO;
+						aranhas[i].deslocarXY(0, deslocamentoAranha[i]);
+					}
+				}
+			} else {
+				aranhas[i].deslocarXY(deslocamentoAranha[i], 0);
+				if (Util.houveInterseccao(aranhas[i], "arvores", camadaDeArvores)
+						|| Util.foraDaCena(aranhas[i], this)) {
+					aranhas[i].deslocarXY(-deslocamentoAranha[i], 0);
+					deslocamentoAranha[i] *= -1;
+					if (orientacaoAranhas[i] == Orientacao.DIREITA) {
+						aranhas[i].executarAnimacao("animacaoEsquerdaMovimento");
+						orientacaoAranhas[i] = Orientacao.ESQUERDA;
+						aranhas[i].deslocarXY(deslocamentoAranha[i], 0);
+					} else {
+						aranhas[i].executarAnimacao("animacaoDireitaMovimento");
+						orientacaoAranhas[i] = Orientacao.DIREITA;
+						aranhas[i].deslocarXY(deslocamentoAranha[i], 0);
+					}
 				}
 			}
 		}
@@ -381,14 +393,16 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 
 					|| (Util.houveInterseccao("jogador", sprite, "padrao", barra) && barra.isVisivel()
 							&& entrada.isTeclaPressionada(KeyEvent.VK_A) && barra.corDaBarra == Color.yellow
-							&& score < 1100)) {
-				nivelDaBarra += 10;
+							&& score < 900)) {
+				nivelDaBarra += 5;
 				if (score - 100 >= 0)
 					score -= 100;
 				barra.setVisivel(false);
+
 			}
+
 			if (Util.houveInterseccao("jogador", sprite, "padrao", barra) && entrada.isTeclaPressionada(KeyEvent.VK_A)
-					&& barra.isVisivel() && barra.corDaBarra == Color.yellow && score == 1100) {
+					&& barra.isVisivel() && barra.corDaBarra == Color.yellow && score == 900) {
 				executarVitoria();
 			}
 		}
@@ -418,7 +432,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		if (Util.houveInterseccao(sprite, "grama", camadaDeGrama, "2")) {
 			deslocamento = 3;
 		} else {
-			deslocamento = 10;
+			deslocamento = 6;
 		}
 	}
 
@@ -468,7 +482,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		@SuppressWarnings("unchecked")
 		ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
 				"estadoDasFasesDoDesafioDeAlimentacao");
-		estado.set(3, true);
+		estado.set(5, true);
 	}
 
 }
