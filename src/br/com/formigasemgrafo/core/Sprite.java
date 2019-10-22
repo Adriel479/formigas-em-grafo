@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class Sprite implements Renderizavel {
 
-	protected int x;
-	protected int y;
+	public int x;
+	public int y;
 	protected int comprimento;
 	protected int largura;
 	protected BufferedImage imagem;
@@ -36,14 +36,6 @@ public class Sprite implements Renderizavel {
 
 	public Rectangle2D.Float getArea(String nome) {
 		return areasDeColisao.get(nome);
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
 	}
 
 	public void deslocarXY(int deslocamentoX, int deslocamentoY) {

@@ -21,7 +21,7 @@ public class MapaAlimentacaoProfundidade extends Cena {
 
 	@Override
 	public void onCarregar() {
-		imagem.carregarImagem("fundoMapaAlimentacao", "/assets/fasesAlimentacao.png");
+		imagem.carregarImagem("fundoMapaAlimentacaoEmProfundidade", "/assets/fasesAlimentacaoEmProfundidade.png");
 		imagem.carregarImagem("botaoVoltar0", "/assets/botaoVoltar0.png");
 		imagem.carregarImagem("botaoVoltar1", "/assets/botaoVoltar1.png");
 	}
@@ -50,7 +50,7 @@ public class MapaAlimentacaoProfundidade extends Cena {
 
 	@Override
 	public void onCriar() {
-		fundoMapaAlimentacao = new Sprite(0, 0, imagem.getImagem("fundoMapaAlimentacao")) {
+		fundoMapaAlimentacao = new Sprite(0, 0, imagem.getImagem("fundoMapaAlimentacaoEmProfundidade")) {
 			/*
 			 * Modificações no objeto de renderização devem ser removidas após o uso para
 			 * evitar que as modificações se propagem para os outros sprites.

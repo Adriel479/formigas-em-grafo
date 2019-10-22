@@ -8,8 +8,8 @@ public class Util {
 
 	public static boolean mouseEntrouNaAreaDoSpite(int x, int y, Sprite sprite) {
 		if (sprite != null) {
-			return x >= sprite.getX() && x <= sprite.getX() + sprite.getComprimento() && y >= sprite.getY()
-					&& y <= sprite.getY() + sprite.getLargura();
+			return x >= sprite.x && x <= sprite.x + sprite.getComprimento() && y >= sprite.y
+					&& y <= sprite.y + sprite.getLargura();
 		} else {
 			return false;
 		}
@@ -32,7 +32,7 @@ public class Util {
 		for (int i = 0; i < camada.elementosDaCamada.length; i++) {
 			for (int j = 0; j < camada.elementosDaCamada[0].length; j++) {
 				if (camada.elementosDaCamada[i][j] != null) {
-					if (camada.elementosDaCamada[i][j].getArea(nomeDaArea).intersects(sprite.getX(), sprite.getY(),
+					if (camada.elementosDaCamada[i][j].getArea(nomeDaArea).intersects(sprite.x, sprite.y,
 							sprite.getComprimento(), sprite.getLargura()))
 						return true;
 				}
@@ -45,7 +45,7 @@ public class Util {
 		for (int i = 0; i < camada.elementosDaCamada.length; i++) {
 			for (int j = 0; j < camada.elementosDaCamada[0].length; j++) {
 				if (camada.elementosDaCamada[i][j] != null && camada.elementosDaCamada[i][j].imagem == Imagem.getInstancia().getImagem(nomeImagem)) {
-					if (camada.elementosDaCamada[i][j].getArea(nomeDaArea).intersects(sprite.getX(), sprite.getY(),
+					if (camada.elementosDaCamada[i][j].getArea(nomeDaArea).intersects(sprite.x, sprite.y,
 							sprite.getComprimento(), sprite.getLargura()))
 						return true;
 				}
@@ -67,8 +67,8 @@ public class Util {
 	}
 
 	public static boolean foraDaCena(Sprite sprite, Cena cena) {
-		return sprite.getX() < 0 || sprite.getX() + sprite.getComprimento() >= cena.getComprimento()
-				|| sprite.getY() < 0 || sprite.getY() + sprite.getLargura() >= cena.getLargura();
+		return sprite.x < 0 || sprite.x + sprite.getComprimento() >= cena.getComprimento()
+				|| sprite.y < 0 || sprite.y + sprite.getLargura() >= cena.getLargura();
 	}
 
 }

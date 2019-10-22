@@ -56,6 +56,9 @@ public class BuscaEmLarguraFase1 extends Cena {
 	private boolean pausa;
 	private boolean vitoria;
 	private Queue<Point> fila;
+	private boolean estadoInicial;
+	private long tempoPassado;
+	private int segundos;
 
 	@Override
 	public void onCarregar() {
@@ -63,6 +66,7 @@ public class BuscaEmLarguraFase1 extends Cena {
 		imagem.carregarImagem("jogador", "/assets/spriteSheet.png");
 		imagem.carregarImagem("aranhas", "/assets/spriteSheetCompletoAranha.png");
 		fonte.carregarFonte("fonte", "/assets/kenvector_future_thin.ttf", 20, Font.BOLD);
+		fonte.carregarFonte("fonteTextoInicial", "/assets/kenvector_future_thin.ttf", 150, Font.BOLD);
 		imagem.carregarImagem("botaoVoltar0", "/assets/botaoVoltar0.png");
 		imagem.carregarImagem("botaoVoltar1", "/assets/botaoVoltar1.png");
 		imagem.carregarImagem("fimDeJogoAranha", "/assets/fimDeJogo0.png");
@@ -74,7 +78,7 @@ public class BuscaEmLarguraFase1 extends Cena {
 
 	@Override
 	public void onAtualizar() {
-		if (!pausa) {
+		if (!pausa && !estadoInicial) {
 			logicaParaDeixarJogadorLento();
 			logicaParaAtualizacaoDoTempoDeVidaDosFormigueiros();
 			if (!pausa) {
@@ -85,7 +89,7 @@ public class BuscaEmLarguraFase1 extends Cena {
 			}
 		} else if (pausa && vitoria) {
 			logicaBotaoDeProximo();
-		} else if (pausa) {
+		} else if (pausa && !estadoInicial) {
 			logicaBotaoDeVoltar();
 		}
 	}
@@ -94,6 +98,9 @@ public class BuscaEmLarguraFase1 extends Cena {
 	public void onCriar() {
 		pausa = false;
 		vitoria = false;
+		estadoInicial = true;
+		segundos = 5;
+		tempoPassado = 0;
 		score = 0;
 		nivelDaBarra = 6;
 		nivelDaBarraInterna = 4;
@@ -106,6 +113,7 @@ public class BuscaEmLarguraFase1 extends Cena {
 		criarAranhas();
 		criarJogador();
 		criarFimDeJogo();
+
 	}
 
 	@Override
@@ -115,7 +123,23 @@ public class BuscaEmLarguraFase1 extends Cena {
 		g.setColor(Color.white);
 		g.setFont(fonte.getFonte("fonte"));
 		g.drawString("Pontuação: " + score, 30, 30);
+		tempoInicial(g);
 		g.setComposite(composite);
+	}
+
+	private void tempoInicial(Graphics2D g) {
+		if (estadoInicial) {
+			long agora = System.currentTimeMillis();
+			g.setFont(fonte.getFonte("fonteTextoInicial"));
+			g.drawString(String.valueOf(segundos), 360, 350);
+			if (agora - tempoPassado >= 1000) {
+				tempoPassado = agora;
+				segundos--;
+			}
+			if (segundos == 0) {
+				estadoInicial = false;
+			}
+		}
 	}
 
 	@Override
