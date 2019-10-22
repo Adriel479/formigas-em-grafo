@@ -11,7 +11,7 @@ import br.com.formigasemgrafo.core.Cena;
 import br.com.formigasemgrafo.core.Sprite;
 import br.com.formigasemgrafo.core.Util;
 
-public class MapaAlimentacao extends Cena {
+public class MapaAlimentacaoProfundidade extends Cena {
 
 	private Sprite fundoMapaAlimentacao;
 	private Ellipse2D.Float[] fases;

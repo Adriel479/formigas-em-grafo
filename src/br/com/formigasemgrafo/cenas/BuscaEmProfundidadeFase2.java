@@ -418,7 +418,7 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 				botaoVoltar0.setVisivel(false);
 				botaoVoltar1.setVisivel(true);
 				if (entrada.isClique()) {
-					executarCena("mapaAlimentacao");
+					executarCena("mapaAlimentacaoProfundidade");
 				}
 			} else {
 				botaoVoltar0.setVisivel(true);
@@ -432,7 +432,7 @@ public class BuscaEmProfundidadeFase2 extends Cena {
 			botaoProximo0.setVisivel(false);
 			botaoProximo1.setVisivel(true);
 			if (entrada.isClique()) {
-				executarCena("mapaAlimentacao");
+				executarCena("mapaAlimentacaoProfundidade");
 			}
 		} else {
 			botaoProximo0.setVisivel(true);

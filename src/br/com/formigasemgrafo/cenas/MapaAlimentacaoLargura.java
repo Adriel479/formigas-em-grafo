@@ -5,16 +5,17 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
 
 import br.com.formigasemgrafo.core.Cena;
 import br.com.formigasemgrafo.core.Sprite;
 import br.com.formigasemgrafo.core.Util;
 
-public class MapaProtecao extends Cena {
+public class MapaAlimentacaoLargura extends Cena {
 
-	private Sprite fundoMapaProtecao;
+	private Sprite fundoMapaAlimentacao;
 	private Ellipse2D.Float[] fases;
-	private boolean[] estadoDasFasesDoDesafioDeProtecao;
+	private ArrayList<Boolean> estadoDasFasesDoDesafioDeAlimentacaoEmLargura;
 	private Sprite botaoVoltar0;
 	private Sprite botaoVoltar1;
 
@@ -37,11 +38,18 @@ public class MapaProtecao extends Cena {
 			botaoVoltar0.setVisivel(true);
 			botaoVoltar1.setVisivel(false);
 		}
+
+		for (int i = 0; i < estadoDasFasesDoDesafioDeAlimentacaoEmLargura.size(); i++) {
+			if (Util.mouseEntrouNaAreaDaForma(entrada.getX(), entrada.getY(), fases[i]) && entrada.isClique()
+					&& estadoDasFasesDoDesafioDeAlimentacaoEmLargura.get(i)) {
+				executarCena("fase" + (i + 1) + "BuscaEmLargura");
+			}
+		}
 	}
 
 	@Override
 	public void onCriar() {
-		fundoMapaProtecao = new Sprite(0, 0, imagem.getImagem("fundoMapaProtecao")) {
+		fundoMapaAlimentacao = new Sprite(0, 0, imagem.getImagem("fundoMapaAlimentacao")) {
 			/*
 			 * Modificações no objeto de renderização devem ser removidas após o uso para
 			 * evitar que as modificações se propagem para os outros sprites.
@@ -56,24 +64,32 @@ public class MapaProtecao extends Cena {
 				Composite cacheComposite = g.getComposite();
 				g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 				g.setColor(new Color(231, 70, 40));
-				for (int i = 0; i < estadoDasFasesDoDesafioDeProtecao.length; i++) {
-					if (!estadoDasFasesDoDesafioDeProtecao[i]) {
+				for (int i = 0; i < estadoDasFasesDoDesafioDeAlimentacaoEmLargura.size(); i++) {
+					if (!estadoDasFasesDoDesafioDeAlimentacaoEmLargura.get(i)) {
 						g.fill(fases[i]);
 					}
 				}
 				g.setComposite(cacheComposite);
 			}
 		};
-		adicionarObjetoRenderizavel(fundoMapaProtecao);
-		fases = new Ellipse2D.Float[5];
-		estadoDasFasesDoDesafioDeProtecao = new boolean[5];
+		adicionarObjetoRenderizavel(fundoMapaAlimentacao);
+		fases = new Ellipse2D.Float[6];
 
-		fases[0] = new Ellipse2D.Float(360, 200, 80, 80);
-		fases[1] = new Ellipse2D.Float(580, 200, 80, 80);
-		fases[2] = new Ellipse2D.Float(160, 340, 80, 80);
-		fases[3] = new Ellipse2D.Float(360, 340, 80, 80);
-		fases[4] = new Ellipse2D.Float(580, 340, 80, 80);
-		adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeProtecao", estadoDasFasesDoDesafioDeProtecao);
+		if (estadoDasFasesDoDesafioDeAlimentacaoEmLargura == null) {
+			estadoDasFasesDoDesafioDeAlimentacaoEmLargura = new ArrayList<Boolean>(6);
+			estadoDasFasesDoDesafioDeAlimentacaoEmLargura.add(true);
+			for (int i = 1; i < 6; i++)
+				estadoDasFasesDoDesafioDeAlimentacaoEmLargura.add(false);
+			adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeAlimentacao",
+					estadoDasFasesDoDesafioDeAlimentacaoEmLargura);
+		}
+
+		fases[0] = new Ellipse2D.Float(160, 200, 80, 80);
+		fases[1] = new Ellipse2D.Float(360, 200, 80, 80);
+		fases[2] = new Ellipse2D.Float(580, 200, 80, 80);
+		fases[3] = new Ellipse2D.Float(160, 340, 80, 80);
+		fases[4] = new Ellipse2D.Float(360, 340, 80, 80);
+		fases[5] = new Ellipse2D.Float(580, 340, 80, 80);
 
 		botaoVoltar0 = new Sprite(278, 464, imagem.getImagem("botaoVoltar0"));
 		botaoVoltar1 = new Sprite(278, 464, imagem.getImagem("botaoVoltar1"));

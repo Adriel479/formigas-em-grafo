@@ -31,7 +31,7 @@ public class Desafios extends Cena {
 			botaoAlimentacao0.setVisivel(false);
 			botaoAlimentacao1.setVisivel(true);
 			if (entrada.isClique()) {
-				executarCena("mapaAlimentacao");
+				executarCena("mapaAlimentacaoProfundidade");
 			}
 		} else {
 			botaoAlimentacao0.setVisivel(true);
@@ -42,7 +42,7 @@ public class Desafios extends Cena {
 			botaoProtecao0.setVisivel(false);
 			botaoProtecao1.setVisivel(true);
 			if (entrada.isClique()) {
-				executarCena("mapaProtecao");
+				executarCena("mapaAlimentacaoLargura");
 			}
 		} else {
 			botaoProtecao0.setVisivel(true);
