@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -207,43 +208,43 @@ public class BuscaEmLarguraFase6 extends Cena {
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(2, 1), barra);
-		
+
 		barra = new BarraDeEnergia(310, 70, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(6, 1), barra);
-		
+
 		barra = new BarraDeEnergia(510, 70, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(10, 1), barra);
-		
+
 		barra = new BarraDeEnergia(110, 170, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(2, 3), barra);
-		
+
 		barra = new BarraDeEnergia(310, 170, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(6, 3), barra);
-		
+
 		barra = new BarraDeEnergia(410, 170, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(8, 3), barra);
-		
+
 		barra = new BarraDeEnergia(610, 120, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(12, 2), barra);
-		
+
 		barra = new BarraDeEnergia(760, 120, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
@@ -255,110 +256,114 @@ public class BuscaEmLarguraFase6 extends Cena {
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(10, 4), barra);
-		
+
 		barra = new BarraDeEnergia(610, 220, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(12, 4), barra);
-		
+
 		barra = new BarraDeEnergia(110, 270, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(2, 5), barra);
-		
+
 		barra = new BarraDeEnergia(760, 320, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(15, 6), barra);
-		
+
 		barra = new BarraDeEnergia(110, 370, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(2, 7), barra);
-		
+
 		barra = new BarraDeEnergia(310, 370, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(6, 7), barra);
-		
+
 		barra = new BarraDeEnergia(410, 370, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(8, 7), barra);
-		
+
 		barra = new BarraDeEnergia(610, 370, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(12, 7), barra);
-		
+
 		barra = new BarraDeEnergia(110, 520, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(2, 10), barra);
-		
+
 		barra = new BarraDeEnergia(310, 520, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(6, 10), barra);
-		
+
 		barra = new BarraDeEnergia(410, 520, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(8, 10), barra);
-		
+
 		barra = new BarraDeEnergia(610, 520, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(12, 10), barra);
-		
+
 		barra = new BarraDeEnergia(760, 570, new BufferedImage(30, 10, BufferedImage.TYPE_3BYTE_BGR));
 		barra.setNivelDaBarra(100);
 		barra.setExtremo(false);
 		barra.criarAreaRetangular("padrao", 0, 0, 30, 10);
 		mapaDeBarras.put(new Point(15, 11), barra);
-		
+
 		for (BarraDeEnergia barraE : mapaDeBarras.values())
 			adicionarObjetoRenderizavel(barraE);
 		mapaDeAdjacencia = new HashMap<Point, List<Point>>();
-		
-		mapaDeAdjacencia.put(new Point(10, 1), Arrays.asList(new Point(6, 1)));
-		mapaDeAdjacencia.put(new Point(8, 3), Arrays.asList(new Point(8, 7)));
-		mapaDeAdjacencia.put(new Point(10, 4), Arrays.asList(new Point(12, 4)));
-		mapaDeAdjacencia.put(new Point(15, 11), Arrays.asList(new Point(15, 6)));
-		mapaDeAdjacencia.put(new Point(2, 5), Arrays.asList(new Point(2, 7)));
-		mapaDeAdjacencia.put(new Point(2, 10), Arrays.asList(new Point(6, 10)));
-		mapaDeAdjacencia.put(new Point(15, 6), Arrays.asList(new Point(15, 11), new Point(15, 2)));
-		mapaDeAdjacencia.put(new Point(15, 2), Arrays.asList(new Point(15, 6), new Point(12, 2)));
-		mapaDeAdjacencia.put(new Point(12, 2), Arrays.asList(new Point(15, 2), new Point(12, 4)));
-		mapaDeAdjacencia.put(new Point(12, 4), Arrays.asList(new Point(12, 2), new Point(10, 4), new Point(12, 7)));
-		mapaDeAdjacencia.put(new Point(12, 7), Arrays.asList(new Point(12, 4), new Point()));
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+		mapaDeAdjacencia.put(new Point(10, 1), new ArrayList<Point>(Arrays.asList(new Point(6, 1))));
+		mapaDeAdjacencia.put(new Point(8, 3), new ArrayList<Point>(Arrays.asList(new Point(8, 7))));
+		mapaDeAdjacencia.put(new Point(10, 4), new ArrayList<Point>(Arrays.asList(new Point(12, 4))));
+		mapaDeAdjacencia.put(new Point(15, 11), new ArrayList<Point>(Arrays.asList(new Point(15, 6))));
+		mapaDeAdjacencia.put(new Point(2, 5), new ArrayList<Point>(Arrays.asList(new Point(2, 7))));
+		mapaDeAdjacencia.put(new Point(2, 10), new ArrayList<Point>(Arrays.asList(new Point(6, 10))));
+		mapaDeAdjacencia.put(new Point(15, 6),
+				new ArrayList<Point>(Arrays.asList(new Point(15, 11), new Point(15, 2))));
+		mapaDeAdjacencia.put(new Point(15, 2), new ArrayList<Point>(Arrays.asList(new Point(15, 6), new Point(12, 2))));
+		mapaDeAdjacencia.put(new Point(12, 2), new ArrayList<Point>(Arrays.asList(new Point(15, 2), new Point(12, 4))));
+		mapaDeAdjacencia.put(new Point(12, 4),
+				new ArrayList<Point>(Arrays.asList(new Point(12, 2), new Point(10, 4), new Point(12, 7))));
+		mapaDeAdjacencia.put(new Point(12, 7),
+				new ArrayList<Point>(Arrays.asList(new Point(12, 4), new Point(12, 10), new Point(8, 7))));
+		mapaDeAdjacencia.put(new Point(12, 10),
+				new ArrayList<Point>(Arrays.asList(new Point(12, 7), new Point(8, 10))));
+		mapaDeAdjacencia.put(new Point(8, 10),
+				new ArrayList<Point>(Arrays.asList(new Point(12, 10), new Point(6, 10), new Point(8, 7))));
+		mapaDeAdjacencia.put(new Point(8, 7), new ArrayList<Point>(
+				Arrays.asList(new Point(8, 3), new Point(12, 7), new Point(8, 10), new Point(6, 7))));
+		mapaDeAdjacencia.put(new Point(6, 10),
+				new ArrayList<Point>(Arrays.asList(new Point(2, 10), new Point(8, 10), new Point(6, 7))));
+		mapaDeAdjacencia.put(new Point(6, 7), new ArrayList<Point>(
+				Arrays.asList(new Point(8, 7), new Point(6, 10), new Point(2, 7), new Point(6, 3))));
+		mapaDeAdjacencia.put(new Point(6, 3),
+				new ArrayList<Point>(Arrays.asList(new Point(6, 7), new Point(6, 1), new Point(2, 3))));
+		mapaDeAdjacencia.put(new Point(6, 1),
+				new ArrayList<Point>(Arrays.asList(new Point(6, 3), new Point(10, 1), new Point(2, 1))));
+		mapaDeAdjacencia.put(new Point(2, 1), new ArrayList<Point>(Arrays.asList(new Point(6, 1), new Point(2, 3))));
+		mapaDeAdjacencia.put(new Point(2, 3), new ArrayList<Point>(Arrays.asList(new Point(2, 1), new Point(6, 3))));
+		mapaDeAdjacencia.put(new Point(2, 7), new ArrayList<Point>(Arrays.asList(new Point(2, 5), new Point(6, 7))));
 	}
 
 	private void logicaControleDasAranhas() {
@@ -504,7 +509,7 @@ public class BuscaEmLarguraFase6 extends Cena {
 			}
 		}
 
-		if (fila.isEmpty() && score == 1200) {
+		if (fila.isEmpty() && score == 2100) {
 			executarVitoria();
 		}
 	}
