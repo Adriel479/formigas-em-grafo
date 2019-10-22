@@ -267,9 +267,12 @@ public class BuscaEmLarguraFase3 extends Cena {
 		mapaDeAdjacencia.put(new Point(11, 2), new ArrayList<Point>(Arrays.asList(new Point(7, 2))));
 		mapaDeAdjacencia.put(new Point(13, 5), new ArrayList<Point>(Arrays.asList(new Point(7, 5))));
 		mapaDeAdjacencia.put(new Point(12, 9), new ArrayList<Point>(Arrays.asList(new Point(7, 9))));
-		mapaDeAdjacencia.put(new Point(7, 2), new ArrayList<Point>(Arrays.asList(new Point(11, 2), new Point(2, 2), new Point(7, 5))));
-		mapaDeAdjacencia.put(new Point(7, 5), new ArrayList<Point>(Arrays.asList(new Point(2, 5), new Point(13, 5), new Point(7, 2), new Point(7, 9))));
-		mapaDeAdjacencia.put(new Point(7, 9), new ArrayList<Point>(Arrays.asList(new Point(12, 9), new Point(2, 9), new Point(7, 5))));
+		mapaDeAdjacencia.put(new Point(7, 2),
+				new ArrayList<Point>(Arrays.asList(new Point(11, 2), new Point(2, 2), new Point(7, 5))));
+		mapaDeAdjacencia.put(new Point(7, 5), new ArrayList<Point>(
+				Arrays.asList(new Point(2, 5), new Point(13, 5), new Point(7, 2), new Point(7, 9))));
+		mapaDeAdjacencia.put(new Point(7, 9),
+				new ArrayList<Point>(Arrays.asList(new Point(12, 9), new Point(2, 9), new Point(7, 5))));
 	}
 
 	private void logicaControleDasAranhas() {
@@ -405,12 +408,14 @@ public class BuscaEmLarguraFase3 extends Cena {
 					iterator.remove();
 				}
 			}
-			if (mapaDeAdjacencia.get(fila.element()).size() == 0) {
+			if (!fila.isEmpty() && mapaDeAdjacencia.get(fila.element()).size() == 0) {
 				fila.remove();
-				for (Point p : mapaDeAdjacencia.get(fila.element())) {
-					BarraDeEnergia b = mapaDeBarras.get(p);
-					b.setExtremo(true);
-					b.corDaBarra = Color.yellow;
+				if (!fila.isEmpty()) {
+					for (Point p : mapaDeAdjacencia.get(fila.element())) {
+						BarraDeEnergia b = mapaDeBarras.get(p);
+						b.setExtremo(true);
+						b.corDaBarra = Color.yellow;
+					}
 				}
 			}
 		}

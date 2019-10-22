@@ -42,7 +42,7 @@ public class Main {
 		formigasEmGrafo.adicionarCena("fase4BuscaEmLargura", new BuscaEmLarguraFase4());
 		formigasEmGrafo.adicionarCena("fase5BuscaEmLargura", new BuscaEmLarguraFase5());
 		formigasEmGrafo.adicionarCena("fase6BuscaEmLargura", new BuscaEmLarguraFase6());
-		formigasEmGrafo.setCenaAtual("fase6BuscaEmLargura");
+		formigasEmGrafo.setCenaAtual("menuPrincipal");
 		formigasEmGrafo.executarJogo();
 	}
 

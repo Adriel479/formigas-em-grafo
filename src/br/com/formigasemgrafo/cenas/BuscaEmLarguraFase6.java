@@ -499,12 +499,14 @@ public class BuscaEmLarguraFase6 extends Cena {
 					iterator.remove();
 				}
 			}
-			if (mapaDeAdjacencia.get(fila.element()).size() == 0) {
+			if (!fila.isEmpty() && mapaDeAdjacencia.get(fila.element()).size() == 0) {
 				fila.remove();
-				for (Point p : mapaDeAdjacencia.get(fila.element())) {
-					BarraDeEnergia b = mapaDeBarras.get(p);
-					b.setExtremo(true);
-					b.corDaBarra = Color.yellow;
+				if (!fila.isEmpty()) {
+					for (Point p : mapaDeAdjacencia.get(fila.element())) {
+						BarraDeEnergia b = mapaDeBarras.get(p);
+						b.setExtremo(true);
+						b.corDaBarra = Color.yellow;
+					}
 				}
 			}
 		}
