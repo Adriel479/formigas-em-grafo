@@ -98,6 +98,8 @@ public class BuscaEmLarguraFase3 extends Cena {
 		pausa = false;
 		vitoria = false;
 		score = 0;
+		segundos = 5;
+		tempoPassado = 0;
 		nivelDaBarra = 2;
 		nivelDaBarraInterna = 1;
 		deslocamentoAranha = new int[] { 10, 12 };
