@@ -15,6 +15,7 @@ import br.com.formigasemgrafo.cenas.BuscaEmProfundidadeFase3;
 import br.com.formigasemgrafo.cenas.BuscaEmProfundidadeFase4;
 import br.com.formigasemgrafo.cenas.BuscaEmProfundidadeFase5;
 import br.com.formigasemgrafo.cenas.BuscaEmProfundidadeFase6;
+import br.com.formigasemgrafo.cenas.ControleDoJogo;
 import br.com.formigasemgrafo.cenas.DefinicaoDeGrafo;
 import br.com.formigasemgrafo.cenas.Desafios;
 import br.com.formigasemgrafo.cenas.ExemploBuscaEmProfundidade;
@@ -46,7 +47,8 @@ public class Main {
 		formigasEmGrafo.adicionarCena("fase6BuscaEmLargura", new BuscaEmLarguraFase6());
 		formigasEmGrafo.adicionarCena("ajudaBuscaEmProfundidade", new AjudaBuscaEmProfundidade());
 		formigasEmGrafo.adicionarCena("exemploBuscaEmProfundidade", new ExemploBuscaEmProfundidade());
-		formigasEmGrafo.setCenaAtual("fase1BuscaEmLargura");
+		formigasEmGrafo.adicionarCena("controles", new ControleDoJogo());
+		formigasEmGrafo.setCenaAtual("menuPrincipal");
 		formigasEmGrafo.executarJogo();
 	}
 

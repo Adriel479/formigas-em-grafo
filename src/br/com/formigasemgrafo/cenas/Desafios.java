@@ -31,6 +31,7 @@ public class Desafios extends Cena {
 			botaoProfundidade0.setVisivel(false);
 			botaoProfundidade1.setVisivel(true);
 			if (entrada.isClique()) {
+				adicionarAtributoCompartilhavel("desafio", true);
 				executarCena("ajudaBuscaEmProfundidade");
 			}
 		} else {
@@ -42,6 +43,7 @@ public class Desafios extends Cena {
 			botaoLargura0.setVisivel(false);
 			botaoLargura1.setVisivel(true);
 			if (entrada.isClique()) {
+				adicionarAtributoCompartilhavel("desafio", false);
 				executarCena("mapaAlimentacaoLargura");
 			}
 		} else {

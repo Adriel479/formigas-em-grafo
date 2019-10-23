@@ -46,7 +46,7 @@ public class ExemploBuscaEmProfundidade extends Cena {
 			botaoProximo0.setVisivel(false);
 			botaoProximo1.setVisivel(true);
 			if (entrada.isClique()) {
-				executarCena("mapaAlimentacaoProfundidade");
+				executarCena("controles");
 			}
 		} else {
 			botaoProximo0.setVisivel(true);

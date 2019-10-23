@@ -74,7 +74,6 @@ public abstract class Cena {
 		jogo.setNovaCena(true);
 		jogo.getCenaAtual().descarregar();
 		jogo.setCenaAtual(proximaCena);
-		
 	}
 
 	public void adicionarObjetoRenderizavel(Renderizavel objetoRenderizavel) {
