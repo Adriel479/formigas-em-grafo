@@ -130,7 +130,7 @@ public class ExemploBuscaEmLargura extends Cena {
 	private void animarFormiga() {
 
 		long agora = System.currentTimeMillis();
-		if (agora - tempoAnt > 500) {
+		if (agora - tempoAnt > 100) {
 			barraInicial.atualizaNivelDaBarra(1);
 			barraEsquerda.atualizaNivelDaBarra(1);
 			barraDireita.atualizaNivelDaBarra(1);

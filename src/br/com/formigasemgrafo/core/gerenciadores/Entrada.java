@@ -57,6 +57,7 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 		for (int chave : mapaDeTeclas.keySet()) {
 			cacheMapaDeTeclas.put(chave, mapaDeTeclas.get(chave));
 		}
+		mapaDeTeclas.put(MouseEvent.BUTTON1, -1);
 	}
 
 	public int getX() {
@@ -68,7 +69,7 @@ public class Entrada extends KeyAdapter implements MouseMotionListener, MouseLis
 	}
 
 	public boolean isClique() {
-		return cacheMapaDeTeclas.containsKey(MouseEvent.BUTTON1) && cacheMapaDeTeclas.get(MouseEvent.BUTTON1) == PRESSIONADA;
+		return cacheMapaDeTeclas.containsKey(MouseEvent.BUTTON1) && cacheMapaDeTeclas.get(MouseEvent.BUTTON1) == LIBERADA;
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class Audio {
 		}
 	}
 
-	public AudioClip getFonte(String nome) {
+	public AudioClip getAudio(String nome) {
 		return audios.get(nome);
 
 	}
