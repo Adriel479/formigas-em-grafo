@@ -2,6 +2,7 @@ package br.com.formigasemgrafos.main;
 
 import java.io.FileNotFoundException;
 
+import br.com.formigasemgrafo.cenas.AjudaBuscaEmLargura;
 import br.com.formigasemgrafo.cenas.AjudaBuscaEmProfundidade;
 import br.com.formigasemgrafo.cenas.BuscaEmLarguraFase1;
 import br.com.formigasemgrafo.cenas.BuscaEmLarguraFase2;
@@ -18,6 +19,7 @@ import br.com.formigasemgrafo.cenas.BuscaEmProfundidadeFase6;
 import br.com.formigasemgrafo.cenas.ControleDoJogo;
 import br.com.formigasemgrafo.cenas.DefinicaoDeGrafo;
 import br.com.formigasemgrafo.cenas.Desafios;
+import br.com.formigasemgrafo.cenas.ExemploBuscaEmLargura;
 import br.com.formigasemgrafo.cenas.ExemploBuscaEmProfundidade;
 import br.com.formigasemgrafo.cenas.MapaAlimentacaoLargura;
 import br.com.formigasemgrafo.cenas.MapaAlimentacaoProfundidade;
@@ -47,6 +49,8 @@ public class Main {
 		formigasEmGrafo.adicionarCena("fase6BuscaEmLargura", new BuscaEmLarguraFase6());
 		formigasEmGrafo.adicionarCena("ajudaBuscaEmProfundidade", new AjudaBuscaEmProfundidade());
 		formigasEmGrafo.adicionarCena("exemploBuscaEmProfundidade", new ExemploBuscaEmProfundidade());
+		formigasEmGrafo.adicionarCena("ajudaBuscaEmLargura", new AjudaBuscaEmLargura());
+		formigasEmGrafo.adicionarCena("exemploBuscaEmLargura", new ExemploBuscaEmLargura());
 		formigasEmGrafo.adicionarCena("controles", new ControleDoJogo());
 		formigasEmGrafo.setCenaAtual("menuPrincipal");
 		formigasEmGrafo.executarJogo();

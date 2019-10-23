@@ -44,7 +44,7 @@ public class Desafios extends Cena {
 			botaoLargura1.setVisivel(true);
 			if (entrada.isClique()) {
 				adicionarAtributoCompartilhavel("desafio", false);
-				executarCena("mapaAlimentacaoLargura");
+				executarCena("ajudaBuscaEmLargura");
 			}
 		} else {
 			botaoLargura0.setVisivel(true);

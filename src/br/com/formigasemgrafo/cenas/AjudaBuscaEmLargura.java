@@ -4,7 +4,7 @@ import br.com.formigasemgrafo.core.Cena;
 import br.com.formigasemgrafo.core.Sprite;
 import br.com.formigasemgrafo.core.Util;
 
-public class ControleDoJogo extends Cena {
+public class AjudaBuscaEmLargura extends Cena {
 
 	private Sprite fundo;
 	private Sprite botaoVoltar0;
@@ -14,7 +14,7 @@ public class ControleDoJogo extends Cena {
 
 	@Override
 	public void onCarregar() {
-		imagem.carregarImagem("controles", "/assets/controles.png");
+		imagem.carregarImagem("fundoAjudaBuscaEmLargura", "/assets/ajudaBuscaEmLargura.png");
 		imagem.carregarImagem("botaoProximo0", "/assets/botaoProximo0.png");
 		imagem.carregarImagem("botaoProximo1", "/assets/botaoProximo1.png");
 		imagem.carregarImagem("botaoVoltar0", "/assets/botaoVoltar0.png");
@@ -27,11 +27,7 @@ public class ControleDoJogo extends Cena {
 			botaoProximo0.setVisivel(false);
 			botaoProximo1.setVisivel(true);
 			if (entrada.isClique()) {
-				if ((Boolean) getAtributoCompartilhavel("desafio")) {
-					executarCena("mapaAlimentacaoProfundidade");
-				} else {
-					executarCena("mapaAlimentacaoLargura");
-				}
+				executarCena("exemploBuscaEmLargura");
 			}
 		} else {
 			botaoProximo0.setVisivel(true);
@@ -42,11 +38,7 @@ public class ControleDoJogo extends Cena {
 			botaoVoltar0.setVisivel(false);
 			botaoVoltar1.setVisivel(true);
 			if (entrada.isClique()) {
-				if ((Boolean) getAtributoCompartilhavel("desafio")) {
-					executarCena("exemploBuscaEmProfundidade");
-				} else {
-					executarCena("ajudaBuscaEmLargura");
-				}
+				executarCena("desafios");
 			}
 		} else {
 			botaoVoltar0.setVisivel(true);
@@ -56,7 +48,7 @@ public class ControleDoJogo extends Cena {
 
 	@Override
 	public void onCriar() {
-		fundo = new Sprite(0, 0, imagem.getImagem("controles"));
+		fundo = new Sprite(0, 0, imagem.getImagem("fundoAjudaBuscaEmLargura"));
 		botaoVoltar0 = new Sprite(99, 481, imagem.getImagem("botaoVoltar0"));
 		botaoVoltar1 = new Sprite(99, 481, imagem.getImagem("botaoVoltar1"));
 		botaoProximo0 = new Sprite(450, 481, imagem.getImagem("botaoProximo0"));
