@@ -52,6 +52,9 @@ public class BuscaEmProfundidadeFase6 extends Cena {
 	private Sprite botaoProximo1;
 	private boolean pausa;
 	private boolean vitoria;
+	private boolean estadoInicial;
+	private long tempoPassado;
+	private int segundos;
 
 	@Override
 	public void onCarregar() {
@@ -70,7 +73,7 @@ public class BuscaEmProfundidadeFase6 extends Cena {
 
 	@Override
 	public void onAtualizar() {
-		if (!pausa) {
+		if (!pausa && !estadoInicial) {
 			logicaParaDeixarJogadorLento();
 			logicaParaAtualizacaoDoTempoDeVidaDosFormigueiros();
 			if (!pausa) {
@@ -81,7 +84,7 @@ public class BuscaEmProfundidadeFase6 extends Cena {
 			}
 		} else if (pausa && vitoria) {
 			logicaBotaoDeProximo();
-		} else if (pausa) {
+		} else if (pausa && !estadoInicial) {
 			logicaBotaoDeVoltar();
 		}
 	}
@@ -91,6 +94,9 @@ public class BuscaEmProfundidadeFase6 extends Cena {
 		pausa = false;
 		vitoria = false;
 		score = 0;
+		estadoInicial = true;
+		segundos = 5;
+		tempoPassado = 0;
 		nivelDaBarra = 2;
 		nivelDaBarraInterna = 1;
 		deslocamentoAranha = new int[] { 10, 12 };
@@ -110,7 +116,23 @@ public class BuscaEmProfundidadeFase6 extends Cena {
 		g.setColor(Color.white);
 		g.setFont(fonte.getFonte("fonte"));
 		g.drawString("Pontuação: " + score, 30, 30);
+		tempoInicial(g);
 		g.setComposite(composite);
+	}
+
+	private void tempoInicial(Graphics2D g) {
+		if (estadoInicial) {
+			long agora = System.currentTimeMillis();
+			g.setFont(fonte.getFonte("fonteTextoInicial"));
+			g.drawString(String.valueOf(segundos), 360, 350);
+			if (agora - tempoPassado >= 1000) {
+				tempoPassado = agora;
+				segundos--;
+			}
+			if (segundos == 0) {
+				estadoInicial = false;
+			}
+		}
 	}
 
 	@Override

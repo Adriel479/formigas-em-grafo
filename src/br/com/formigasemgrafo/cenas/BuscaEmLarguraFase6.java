@@ -97,6 +97,7 @@ public class BuscaEmLarguraFase6 extends Cena {
 	public void onCriar() {
 		pausa = false;
 		vitoria = false;
+		estadoInicial = true;
 		score = 0;
 		segundos = 5;
 		tempoPassado = 0;

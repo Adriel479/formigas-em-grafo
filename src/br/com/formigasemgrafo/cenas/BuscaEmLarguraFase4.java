@@ -98,6 +98,7 @@ public class BuscaEmLarguraFase4 extends Cena {
 		pausa = false;
 		vitoria = false;
 		score = 0;
+		estadoInicial = true;
 		segundos = 5;
 		tempoPassado = 0;
 		nivelDaBarra = 2;
