@@ -174,7 +174,7 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 	}
 
 	private void criarJogador() {
-		sprite = new SpriteSheet(110, 255, imagem.getImagem("jogador"), 50, 50);
+		sprite = new SpriteSheet(105, 255, imagem.getImagem("jogador"), 50, 50);
 		sprite.adicionarAnimacao("animacaoCimaNormal", new Animacao(0, 0, new Integer[] { 0 }));
 		sprite.adicionarAnimacao("animacaoCimaAtaque", new Animacao(0, 0, new Integer[] { 1 }));
 		sprite.adicionarAnimacao("animacaoCimaMovimento", new Animacao(0, 0, new Integer[] { 2, 3 }));
@@ -187,8 +187,8 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 		sprite.adicionarAnimacao("animacaoEsquerdaNormal", new Animacao(0, 150, new Integer[] { 0 }));
 		sprite.adicionarAnimacao("animacaoEsquerdaAtaque", new Animacao(0, 150, new Integer[] { 1 }));
 		sprite.adicionarAnimacao("animacaoEsquerdaMovimento", new Animacao(0, 150, new Integer[] { 2, 3 }));
-		sprite.executarAnimacao("animacaoDireitaNormal");
-		orientacaoDaFormiga = Orientacao.DIREITA;
+		sprite.executarAnimacao("animacaoBaixoNormal");
+		orientacaoDaFormiga = Orientacao.BAIXO;
 		sprite.redimensionar(40, 40);
 		sprite.criarAreaRetangular("jogador", 14, 5, 12, 34);
 		adicionarObjetoRenderizavel(sprite);

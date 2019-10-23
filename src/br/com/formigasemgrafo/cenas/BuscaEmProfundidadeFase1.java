@@ -175,7 +175,7 @@ public class BuscaEmProfundidadeFase1 extends Cena {
 	}
 
 	private void criarJogador() {
-		sprite = new SpriteSheet(350, 500, imagem.getImagem("jogador"), 50, 50);
+		sprite = new SpriteSheet(355, 555, imagem.getImagem("jogador"), 50, 50);
 		sprite.adicionarAnimacao("animacaoCimaNormal", new Animacao(0, 0, new Integer[] { 0 }));
 		sprite.adicionarAnimacao("animacaoCimaAtaque", new Animacao(0, 0, new Integer[] { 1 }));
 		sprite.adicionarAnimacao("animacaoCimaMovimento", new Animacao(0, 0, new Integer[] { 2, 3 }));
