@@ -56,7 +56,7 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 	private boolean estadoInicial;
 	private long tempoPassado;
 	private int segundos;
-	private AudioClip audioFase, alimentacao;
+	private AudioClip alimentacao;
 
 	@Override
 	public void onCarregar() {
@@ -71,7 +71,6 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 		imagem.carregarImagem("fimDeJogoVitoria", "/assets/fimDeJogoVitoria.png");
 		imagem.carregarImagem("botaoProximo0", "/assets/botaoProximo0.png");
 		imagem.carregarImagem("botaoProximo1", "/assets/botaoProximo1.png");
-		audio.carregarAudio("somFase", "/assets/090719bgmidea2.wav");
 		audio.carregarAudio("alimentacao", "/assets/gmae.wav");
 	}
 
@@ -106,7 +105,6 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 		deslocamentoAranha = new int[] { 8, 10, 12 };
 		orientacaoAranhas = new Orientacao[] { Orientacao.BAIXO, Orientacao.DIREITA, Orientacao.BAIXO };
 		pontos = new Point[] { new Point(150, 200), new Point(460, 230), new Point(300, 200) };
-		audioFase = audio.getAudio("somFase");
 		alimentacao = audio.getAudio("alimentacao");
 		criarMapa();
 		criarBarrasDeVida();
@@ -137,8 +135,6 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 			}
 			if (segundos == 0) {
 				estadoInicial = false;
-				audioFase.loop();
-				audioFase.play();
 			}
 		}
 	}
@@ -433,7 +429,6 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 				pausa = true;
 				fimDeJogoFormigueiro.setVisivel(true);
 				botaoVoltar0.setVisivel(true);
-				audioFase.stop();
 			}
 		}
 	}
@@ -452,7 +447,6 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 				fimDeJogoAranha.setVisivel(true);
 				botaoVoltar0.setVisivel(true);
 				pausa = true;
-				audioFase.stop();
 			}
 		}
 	}
@@ -494,7 +488,6 @@ public class BuscaEmProfundidadeFase4 extends Cena {
 		ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
 				"estadoDasFasesDoDesafioDeAlimentacao");
 		estado.set(4, true);
-		audioFase.stop();
 	}
 
 }

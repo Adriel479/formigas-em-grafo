@@ -60,7 +60,7 @@ public class BuscaEmLarguraFase5 extends Cena {
 	private boolean estadoInicial;
 	private long tempoPassado;
 	private int segundos;
-	private AudioClip audioFase, alimentacao;
+	private AudioClip alimentacao;
 
 	@Override
 	public void onCarregar() {
@@ -75,7 +75,6 @@ public class BuscaEmLarguraFase5 extends Cena {
 		imagem.carregarImagem("fimDeJogoVitoria", "/assets/fimDeJogoVitoria.png");
 		imagem.carregarImagem("botaoProximo0", "/assets/botaoProximo0.png");
 		imagem.carregarImagem("botaoProximo1", "/assets/botaoProximo1.png");
-		audio.carregarAudio("somFase", "/assets/090719bgmidea2.wav");
 		audio.carregarAudio("alimentacao", "/assets/gmae.wav");
 	}
 
@@ -112,7 +111,6 @@ public class BuscaEmLarguraFase5 extends Cena {
 		pontos = new Point[] { new Point(550, 200), new Point(350, 100) };
 		fila = new LinkedList<Point>();
 		alimentacao = audio.getAudio("alimentacao");
-		audioFase = audio.getAudio("somFase");
 		criarMapa();
 		criarBarrasDeVida();
 		criarAranhas();
@@ -142,8 +140,6 @@ public class BuscaEmLarguraFase5 extends Cena {
 			}
 			if (segundos == 0) {
 				estadoInicial = false;
-				audioFase.loop();
-				audioFase.play();
 			}
 		}
 	}
@@ -471,7 +467,6 @@ public class BuscaEmLarguraFase5 extends Cena {
 						BarraDeEnergia b = mapaDeBarras.get(p);
 						b.setExtremo(true);
 						b.corDaBarra = Color.yellow;
-						audioFase.stop();
 					}
 				}
 			}
@@ -498,7 +493,6 @@ public class BuscaEmLarguraFase5 extends Cena {
 				pausa = true;
 				fimDeJogoFormigueiro.setVisivel(true);
 				botaoVoltar0.setVisivel(true);
-				audioFase.stop();
 			}
 		}
 	}
@@ -517,7 +511,6 @@ public class BuscaEmLarguraFase5 extends Cena {
 				fimDeJogoAranha.setVisivel(true);
 				botaoVoltar0.setVisivel(true);
 				pausa = true;
-				audioFase.stop();
 			}
 		}
 	}
@@ -559,7 +552,6 @@ public class BuscaEmLarguraFase5 extends Cena {
 		ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
 				"estadoDasFasesDoDesafioDeAlimentacao");
 		estado.set(5, true);
-		audioFase.stop();
 	}
 
 }

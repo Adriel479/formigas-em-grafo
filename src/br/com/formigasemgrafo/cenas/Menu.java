@@ -19,6 +19,7 @@ public class Menu extends Cena {
 		imagem.carregarImagem("botaoCredito1", "/assets/botaoCredito1.png");
 		imagem.carregarImagem("botaoIniciar0", "/assets/botaoIniciar0.png");
 		imagem.carregarImagem("botaoIniciar1", "/assets/botaoIniciar1.png");
+		audio.carregarAudio("musicaDeFundo", "/assets/090719bgmidea2.wav");
 	}
 
 	@Override
@@ -53,6 +54,9 @@ public class Menu extends Cena {
 
 		botaoIniciar1.setVisivel(false);
 		botaoCredito1.setVisivel(false);
+		
+		audio.getAudio("musicaDeFundo").loop();
+		audio.getAudio("musicaDeFundo").play();
 
 		adicionarObjetoRenderizavel(fundoMenu);
 		adicionarObjetoRenderizavel(botaoIniciar0);
