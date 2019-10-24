@@ -71,7 +71,7 @@ public class BuscaEmProfundidadeFase6 extends Cena {
 		imagem.carregarImagem("fimDeJogoVitoria", "/assets/fimDeJogoVitoria.png");
 		imagem.carregarImagem("botaoProximo0", "/assets/botaoProximo0.png");
 		imagem.carregarImagem("botaoProximo1", "/assets/botaoProximo1.png");
-		audio.carregarAudio("alimentacao", "/assets/gmae.wav");
+		audio.carregarAudio("alimentacao", "assets/gmae.wav");
 	}
 
 	@Override

@@ -1,12 +1,9 @@
 package br.com.formigasemgrafo.core.gerenciadores;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -17,8 +14,8 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
-import br.com.formigasemgrafo.core.MapaSprite;
 import br.com.formigasemgrafo.core.Camada;
+import br.com.formigasemgrafo.core.MapaSprite;
 
 public class Mapa {
 
@@ -40,36 +37,31 @@ public class Mapa {
 	public void carregarMapaDeSprite(String nome, String caminhoDoAgrupamentoDeSprite,
 			String recursosDoAgrupamentoDeSprite) {
 		if (!mapas.containsKey(nome)) {
-			try {
-				carregarRecursosDoMapa(recursosDoAgrupamentoDeSprite);
-				JsonReader leitor = Json.createReader(
-						new FileInputStream(new File(getClass().getResource(caminhoDoAgrupamentoDeSprite).toURI())));
-				JsonObject mapa = leitor.readObject();
-				JsonArray camadas = mapa.getJsonArray("layers");
-				MapaSprite grupo = new MapaSprite(camadas.size());
+			carregarRecursosDoMapa(recursosDoAgrupamentoDeSprite);
+			JsonReader leitor = Json.createReader(getClass().getResourceAsStream(caminhoDoAgrupamentoDeSprite));
+			JsonObject mapa = leitor.readObject();
+			JsonArray camadas = mapa.getJsonArray("layers");
+			MapaSprite grupo = new MapaSprite(camadas.size());
 
-				for (int i = 0; i < camadas.size(); i++) {
-					JsonObject jsonCamada = camadas.getJsonObject(i);
-					Camada camada = new Camada(jsonCamada.getInt("height"), jsonCamada.getInt("width"));
-					camada.setComprimentoSprite(mapa.getInt("tilewidth"));
-					camada.setAlturaSprite(mapa.getInt("tileheight"));
-					camada.setOpacidade(jsonCamada.getJsonNumber("opacity").numberValue().floatValue());
-					camada.setVisivel(jsonCamada.getBoolean("visible"));
-					JsonArray matrizAssociativaDeImagens = jsonCamada.getJsonArray("data");
-					camada.configurarElementosDaCamada(matrizAssociativaDeImagens.toArray());
-					grupo.adicionarCamada(camada);
-				}
-				leitor.close();
-				mapas.put(nome, grupo);
-			} catch (FileNotFoundException | URISyntaxException e) {
-				e.printStackTrace();
+			for (int i = 0; i < camadas.size(); i++) {
+				JsonObject jsonCamada = camadas.getJsonObject(i);
+				Camada camada = new Camada(jsonCamada.getInt("height"), jsonCamada.getInt("width"));
+				camada.setComprimentoSprite(mapa.getInt("tilewidth"));
+				camada.setAlturaSprite(mapa.getInt("tileheight"));
+				camada.setOpacidade(jsonCamada.getJsonNumber("opacity").numberValue().floatValue());
+				camada.setVisivel(jsonCamada.getBoolean("visible"));
+				JsonArray matrizAssociativaDeImagens = jsonCamada.getJsonArray("data");
+				camada.configurarElementosDaCamada(matrizAssociativaDeImagens.toArray());
+				grupo.adicionarCamada(camada);
 			}
+			leitor.close();
+			mapas.put(nome, grupo);
 		}
 	}
 
 	private void carregarRecursosDoMapa(String caminho) {
 		try (BufferedReader leitor = new BufferedReader(
-				new FileReader(new File(getClass().getResource(caminho).toURI())))) {
+				new InputStreamReader((getClass().getResourceAsStream(caminho))))) {
 			Pattern ids = Pattern.compile("id=\"\\d+\"");
 			Pattern local = Pattern.compile("source=\".+\"");
 			while (leitor.ready()) {
@@ -93,8 +85,6 @@ public class Mapa {
 			}
 			leitor.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();

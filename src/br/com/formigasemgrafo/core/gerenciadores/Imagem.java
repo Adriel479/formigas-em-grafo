@@ -1,10 +1,8 @@
 package br.com.formigasemgrafo.core.gerenciadores;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +23,14 @@ public class Imagem {
 
 	public void carregarImagem(String nome, String caminho) {
 		if (!imagens.containsKey(nome)) {
-			URL url = getClass().getResource(caminho);
-			if (url == null) {
+			InputStream entrada = getClass().getResourceAsStream(caminho);
+			if (entrada == null) {
 				throw new RuntimeException(String.format("A imagem %s não foi encontrada.", caminho));
 			} else {
 				BufferedImage imagem;
 				try {
-					imagem = ImageIO.read(new File(url.toURI()));
+					imagem = ImageIO.read(entrada);
 					imagens.put(nome, imagem);
-				} catch (URISyntaxException e) {
-					e.printStackTrace();
 				} catch (IOException ioException) {
 					ioException.printStackTrace();
 				}

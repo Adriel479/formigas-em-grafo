@@ -76,7 +76,8 @@ public class BuscaEmLarguraFase1 extends Cena {
 		imagem.carregarImagem("fimDeJogoVitoria", "/assets/fimDeJogoVitoria.png");
 		imagem.carregarImagem("botaoProximo0", "/assets/botaoProximo0.png");
 		imagem.carregarImagem("botaoProximo1", "/assets/botaoProximo1.png");
-		audio.carregarAudio("alimentacao", "/assets/gmae.wav");
+		audio.carregarAudio("alimentacao", "assets/gmae.wav");
+		audio.carregarAudio("musicaDeFundo", "assets/bgmidea2.wav");
 	}
 
 	@Override
@@ -112,6 +113,7 @@ public class BuscaEmLarguraFase1 extends Cena {
 		pontos = new Point[] { new Point(250, 200), new Point(350, 100) };
 		fila = new LinkedList<Point>();
 		alimentacao = audio.getAudio("alimentacao");
+		audio.getAudio("musicaDeFundo").loop();
 		criarMapa();
 		criarBarrasDeVida();
 		criarAranhas();

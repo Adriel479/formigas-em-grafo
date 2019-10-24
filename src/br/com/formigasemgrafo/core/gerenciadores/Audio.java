@@ -27,7 +27,7 @@ public class Audio {
 
 	public void carregarAudio(String nome, String caminho) {
 		if (!audios.containsKey(nome)) {
-			URL url = getClass().getResource(caminho);
+			URL url = getClass().getClassLoader().getResource(caminho);
 			if (url == null) {
 				throw new RuntimeException(String.format("O audio %s não foi encontradao.", caminho));
 			} else {
@@ -38,7 +38,6 @@ public class Audio {
 
 	public AudioClip getAudio(String nome) {
 		return audios.get(nome);
-
 	}
 
 }
