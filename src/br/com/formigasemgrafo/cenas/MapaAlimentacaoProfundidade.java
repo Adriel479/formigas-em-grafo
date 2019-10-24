@@ -16,27 +16,27 @@ public class MapaAlimentacaoProfundidade extends Cena {
 	private Sprite fundoMapaAlimentacao;
 	private Ellipse2D.Float[] fases;
 	private ArrayList<Boolean> estadoDasFasesDoDesafioDeAlimentacao;
-	private Sprite botaoVoltar0;
-	private Sprite botaoVoltar1;
+	private Sprite botaoDesafio0;
+	private Sprite botaoDesafio1;
 
 	@Override
 	public void onCarregar() {
 		imagem.carregarImagem("fundoMapaAlimentacaoEmProfundidade", "/assets/fasesAlimentacaoEmProfundidade.png");
-		imagem.carregarImagem("botaoVoltar0", "/assets/botaoVoltar0.png");
-		imagem.carregarImagem("botaoVoltar1", "/assets/botaoVoltar1.png");
+		imagem.carregarImagem("botaoDesafio0", "/assets/botaoDesafio0.png");
+		imagem.carregarImagem("botaoDesafio1", "/assets/botaoDesafio1.png");
 	}
 
 	@Override
 	public void onAtualizar() {
-		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoVoltar0)) {
-			botaoVoltar0.setVisivel(false);
-			botaoVoltar1.setVisivel(true);
+		if (Util.mouseEntrouNaAreaDoSpite(entrada.getX(), entrada.getY(), botaoDesafio0)) {
+			botaoDesafio0.setVisivel(false);
+			botaoDesafio1.setVisivel(true);
 			if (entrada.isClique()) {
 				executarCena("desafios");
 			}
 		} else {
-			botaoVoltar0.setVisivel(true);
-			botaoVoltar1.setVisivel(false);
+			botaoDesafio0.setVisivel(true);
+			botaoDesafio1.setVisivel(false);
 		}
 
 		for (int i = 0; i < estadoDasFasesDoDesafioDeAlimentacao.size(); i++) {
@@ -92,13 +92,13 @@ public class MapaAlimentacaoProfundidade extends Cena {
 		fases[4] = new Ellipse2D.Float(360, 340, 80, 80);
 		fases[5] = new Ellipse2D.Float(580, 340, 80, 80);
 
-		botaoVoltar0 = new Sprite(278, 464, imagem.getImagem("botaoVoltar0"));
-		botaoVoltar1 = new Sprite(278, 464, imagem.getImagem("botaoVoltar1"));
+		botaoDesafio0 = new Sprite(278, 464, imagem.getImagem("botaoDesafio0"));
+		botaoDesafio1 = new Sprite(278, 464, imagem.getImagem("botaoDesafio1"));
 
-		botaoVoltar1.setVisivel(false);
+		botaoDesafio1.setVisivel(false);
 
-		adicionarObjetoRenderizavel(botaoVoltar0);
-		adicionarObjetoRenderizavel(botaoVoltar1);
+		adicionarObjetoRenderizavel(botaoDesafio0);
+		adicionarObjetoRenderizavel(botaoDesafio1);
 	}
 
 	@Override

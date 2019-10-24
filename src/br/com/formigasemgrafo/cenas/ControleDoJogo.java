@@ -45,7 +45,7 @@ public class ControleDoJogo extends Cena {
 				if ((Boolean) getAtributoCompartilhavel("desafio")) {
 					executarCena("exemploBuscaEmProfundidade");
 				} else {
-					executarCena("ajudaBuscaEmLargura");
+					executarCena("exemploBuscaEmLargura");
 				}
 			}
 		} else {

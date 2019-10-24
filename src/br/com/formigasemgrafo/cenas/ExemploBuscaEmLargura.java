@@ -57,7 +57,7 @@ public class ExemploBuscaEmLargura extends Cena {
 			botaoVoltar0.setVisivel(false);
 			botaoVoltar1.setVisivel(true);
 			if (entrada.isClique()) {
-				executarCena("ajudaBuscaEmProfundidade");
+				executarCena("ajudaBuscaEmLargura");
 			}
 		} else {
 			botaoVoltar0.setVisivel(true);
