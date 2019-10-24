@@ -19,7 +19,7 @@ public class Jogo {
 	private boolean estadoDoJogo;
 	Entrada entrada;
 	private Map<String, Cena> cenas;
-	private Cena cenaAtual;
+	Cena cenaAtual;
 	private boolean novaCena;
 
 	public Jogo() {
@@ -64,22 +64,20 @@ public class Jogo {
 		carregaDados();
 		cenaAtual.criar();
 		estadoDoJogo = true;
+		long agora = System.currentTimeMillis();
 		while (estadoDoJogo) {
 			entrada.atualizaCache();
-			if (isNovaCena()) {
-				cenaAtual.carregar();
-				cenaAtual.criar();
-				novaCena = false;
-				entrada.limpar();
-			}
-			renderizarJogo();
 			atualizarJogo();
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			renderizarJogo();
+			agora += 60;
+			long pausa = agora - System.currentTimeMillis();
+			if (pausa > 0) {
+				try {
+					Thread.sleep(pausa);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
-			
 		}
 		descarregarDados();
 	}
