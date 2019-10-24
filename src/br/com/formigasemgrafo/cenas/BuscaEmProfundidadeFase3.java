@@ -1,5 +1,6 @@
 package br.com.formigasemgrafo.cenas;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
@@ -55,6 +56,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 	private boolean estadoInicial;
 	private long tempoPassado;
 	private int segundos;
+	private AudioClip audioFase, alimentacao;
 
 	@Override
 	public void onCarregar() {
@@ -69,6 +71,8 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		imagem.carregarImagem("fimDeJogoVitoria", "/assets/fimDeJogoVitoria.png");
 		imagem.carregarImagem("botaoProximo0", "/assets/botaoProximo0.png");
 		imagem.carregarImagem("botaoProximo1", "/assets/botaoProximo1.png");
+		audio.carregarAudio("somFase", "/assets/090719bgmidea2.wav");
+		audio.carregarAudio("alimentacao", "/assets/gmae.wav");
 	}
 
 	@Override
@@ -102,6 +106,8 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		deslocamentoAranha = new int[] { 6, 6 };
 		orientacaoAranhas = new Orientacao[] { Orientacao.BAIXO, Orientacao.BAIXO };
 		pontos = new Point[] { new Point(200, 150), new Point(550, 200) };
+		audioFase = audio.getAudio("somFase");
+		alimentacao = audio.getAudio("alimentacao");
 		criarMapa();
 		criarBarrasDeVida();
 		criarAranhas();
@@ -131,6 +137,8 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 			}
 			if (segundos == 0) {
 				estadoInicial = false;
+				audioFase.loop();
+				audioFase.play();
 			}
 		}
 	}
@@ -394,6 +402,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 						}
 						adjacentes.remove(0);
 					}
+					alimentacao.play();
 					barra.setVisivel(false);
 					score += 100;
 					break;
@@ -432,6 +441,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 				pausa = true;
 				fimDeJogoFormigueiro.setVisivel(true);
 				botaoVoltar0.setVisivel(true);
+				audioFase.stop();
 			}
 		}
 	}
@@ -450,6 +460,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 				fimDeJogoAranha.setVisivel(true);
 				botaoVoltar0.setVisivel(true);
 				pausa = true;
+				audioFase.stop();
 			}
 		}
 	}
@@ -491,6 +502,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
 				"estadoDasFasesDoDesafioDeAlimentacao");
 		estado.set(3, true);
+		audioFase.stop();
 	}
 
 }
