@@ -69,7 +69,7 @@ public class Jogo {
 			entrada.atualizaCache();
 			atualizarJogo();
 			renderizarJogo();
-			agora += 60;
+			agora += 72; // 14 FPS
 			long pausa = agora - System.currentTimeMillis();
 			if (pausa > 0) {
 				try {
