@@ -81,7 +81,7 @@ public class MapaAlimentacaoProfundidade extends Cena {
 			estadoDasFasesDoDesafioDeAlimentacao.add(true);
 			for (int i = 1; i < 6; i++)
 				estadoDasFasesDoDesafioDeAlimentacao.add(false);
-			adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeAlimentacao",
+			adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeAlimentacaoProfundidade",
 					estadoDasFasesDoDesafioDeAlimentacao);
 		}
 

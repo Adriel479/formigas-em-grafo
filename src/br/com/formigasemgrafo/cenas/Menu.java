@@ -11,6 +11,7 @@ public class Menu extends Cena {
 	private Sprite botaoCredito1;
 	private Sprite botaoIniciar0;
 	private Sprite botaoIniciar1;
+	private boolean iniciou = true;
 
 	@Override
 	public void onCarregar() {
@@ -55,7 +56,15 @@ public class Menu extends Cena {
 		botaoIniciar1.setVisivel(false);
 		botaoCredito1.setVisivel(false);
 
-		audio.getAudio("musicaDeFundo").loop();
+		if (iniciou) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					audio.getAudio("musicaDeFundo").loop();
+					iniciou = false;
+				}
+			}).start();
+		}
 
 		adicionarObjetoRenderizavel(fundoMenu);
 		adicionarObjetoRenderizavel(botaoIniciar0);

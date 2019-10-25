@@ -80,7 +80,7 @@ public class MapaAlimentacaoLargura extends Cena {
 			estadoDasFasesDoDesafioDeAlimentacaoEmLargura.add(true);
 			for (int i = 1; i < 6; i++)
 				estadoDasFasesDoDesafioDeAlimentacaoEmLargura.add(false);
-			adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeAlimentacao",
+			adicionarAtributoCompartilhavel("estadoDasFasesDoDesafioDeAlimentacaoEmLargura",
 					estadoDasFasesDoDesafioDeAlimentacaoEmLargura);
 		}
 

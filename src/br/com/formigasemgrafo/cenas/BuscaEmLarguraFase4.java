@@ -556,7 +556,7 @@ public class BuscaEmLarguraFase4 extends Cena {
 		vitoria = true;
 		@SuppressWarnings("unchecked")
 		ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
-				"estadoDasFasesDoDesafioDeAlimentacao");
+				"estadoDasFasesDoDesafioDeAlimentacaoEmLargura");
 		estado.set(4, true);
 	}
 

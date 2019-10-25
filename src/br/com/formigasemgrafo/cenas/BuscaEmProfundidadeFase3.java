@@ -494,7 +494,7 @@ public class BuscaEmProfundidadeFase3 extends Cena {
 		vitoria = true;
 		@SuppressWarnings("unchecked")
 		ArrayList<Boolean> estado = (ArrayList<Boolean>) getAtributoCompartilhavel(
-				"estadoDasFasesDoDesafioDeAlimentacao");
+				"estadoDasFasesDoDesafioDeAlimentacaoProfundidade");
 		estado.set(3, true);
 	}
 
