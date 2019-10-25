@@ -464,6 +464,7 @@ public class BuscaEmLarguraFase1 extends Cena {
 				botaoVoltar0.setVisivel(false);
 				botaoVoltar1.setVisivel(true);
 				if (entrada.isClique()) {
+					audio.getAudio("audioBotao").play();
 					executarCena("mapaAlimentacaoLargura");
 				}
 			} else {
@@ -478,6 +479,7 @@ public class BuscaEmLarguraFase1 extends Cena {
 			botaoProximo0.setVisivel(false);
 			botaoProximo1.setVisivel(true);
 			if (entrada.isClique()) {
+				audio.getAudio("audioBotao").play();
 				executarCena("mapaAlimentacaoLargura");
 			}
 		} else {

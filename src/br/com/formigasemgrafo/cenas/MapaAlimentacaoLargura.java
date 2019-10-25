@@ -32,6 +32,7 @@ public class MapaAlimentacaoLargura extends Cena {
 			botaoDesafio0.setVisivel(false);
 			botaoDesafio1.setVisivel(true);
 			if (entrada.isClique()) {
+				audio.getAudio("audioBotao").play();
 				executarCena("desafios");
 			}
 		} else {

@@ -31,6 +31,7 @@ public class Desafios extends Cena {
 			botaoProfundidade0.setVisivel(false);
 			botaoProfundidade1.setVisivel(true);
 			if (entrada.isClique()) {
+				audio.getAudio("audioBotao").play();
 				adicionarAtributoCompartilhavel("desafio", true);
 				executarCena("ajudaBuscaEmProfundidade");
 			}
@@ -43,6 +44,7 @@ public class Desafios extends Cena {
 			botaoLargura0.setVisivel(false);
 			botaoLargura1.setVisivel(true);
 			if (entrada.isClique()) {
+				audio.getAudio("audioBotao").play();
 				adicionarAtributoCompartilhavel("desafio", false);
 				executarCena("ajudaBuscaEmLargura");
 			}
@@ -55,6 +57,7 @@ public class Desafios extends Cena {
 			botaoVoltar0.setVisivel(false);
 			botaoVoltar1.setVisivel(true);
 			if (entrada.isClique()) {
+				audio.getAudio("audioBotao").play();
 				executarCena("definicaoDeGrafo");
 			}
 		} else {

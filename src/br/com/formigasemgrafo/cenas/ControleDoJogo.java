@@ -27,6 +27,7 @@ public class ControleDoJogo extends Cena {
 			botaoProximo0.setVisivel(false);
 			botaoProximo1.setVisivel(true);
 			if (entrada.isClique()) {
+				audio.getAudio("audioBotao").play();
 				if ((Boolean) getAtributoCompartilhavel("desafio")) {
 					executarCena("mapaAlimentacaoProfundidade");
 				} else {
@@ -42,6 +43,7 @@ public class ControleDoJogo extends Cena {
 			botaoVoltar0.setVisivel(false);
 			botaoVoltar1.setVisivel(true);
 			if (entrada.isClique()) {
+				audio.getAudio("audioBotao").play();
 				if ((Boolean) getAtributoCompartilhavel("desafio")) {
 					executarCena("exemploBuscaEmProfundidade");
 				} else {
