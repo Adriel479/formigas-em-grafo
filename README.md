@@ -8,13 +8,18 @@ O objetivo do jogo é realizar a alimentação de vários formigueiros antes que
 
 Para cada fase existe um mapa diferente e o jogador é livre para se mover por ele, mas ao sair da trilha entre os formigueiros, a formiga fica lenta e desorientada, comprometendo o seu deslocamento e dificultando a chegada até os formigueiros. O mapa é composto por vários formigueiros representando os vértices de um grafo que são conectados pelo feromônio das formigas. 
 
+![Primeira fase da busca em largura](https://raw.githubusercontent.com/Adriel479/formigas-em-grafo/master/recursos-visuais-tralha/imagens-do-jogo/primeira-fase-busca-em-largura.png)
+
 Durante as fases é esperado que o jogador aplique a sequência de visitação dos algoritmos. Entretanto, quando a sequência de visitação não é seguida como esperado, o jogador é penalizado na sua pontuação e o tempo de vida dos formigueiros que deveriam ser visitados é severamente acelerado, fazendo com que entrem em colapso. O jogador só consegue avançar para a próxima fase quando todos os formigueiros são visitados e alimentados à tempo.
 
 Antes de chegar às fases de um desafio, o jogador visualiza uma breve descrição sobre os algoritmos e lhe é mostrado uma pequena animação da mecânica do jogo. O intuito é orientar o usuário sobre as regras que ele precisa seguir. Portanto, a ferramenta não disponibiliza um material completo sobre os algoritmos e sua implementação, mas possibilita que o discente internalize o funcionamento concreto da movimentação executada pelos algoritmos abstratos, por meio da alimentação dos formigueiros.
 
-![Primeira fase da busca em largura](https://raw.githubusercontent.com/Adriel479/formigas-em-grafo/master/recursos-visuais-tralha/imagens-do-jogo/primeira-fase-busca-em-largura.png)
-
 **Figura 01:** Primeira fase da busca em largura.
+
+# Autor
+
+  - **Nome:** Adriel Vieira Santos
+  - **E-mail:** adriel.klt@gmail.com
 
 License
 ----
