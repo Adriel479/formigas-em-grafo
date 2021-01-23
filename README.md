@@ -1,6 +1,6 @@
 # Formigas em Grafos
 
-Formigas em Grafos é um jogo educacional desenvolvido para apoior o ensino e aprendizagem dos algoritmos de busca em largura e busca em profundidade.
+Formigas em Grafos é um jogo educacional desenvolvido para apoiar o ensino e aprendizagem dos algoritmos de busca em largura e busca em profundidade.
 
 Para baixar o executável acesse: jar/formigas-em-grafo-teste.jar
 
